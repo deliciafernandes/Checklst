@@ -13,10 +13,11 @@ class _ChecklstState extends State<Checklst> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(),
-      // initialRoute: '/',
+      // initialRoute: Splash.id,
       // routes: {
-      //   '/': (context) => Screen0(),
-      // }
+      //   Home.id: (context) => Home(),
+      //   Splash.id: (context) => Splash(),
+      // },
     );
   }
 }
