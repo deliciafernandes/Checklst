@@ -1,6 +1,6 @@
-# checklst
+# Checklst
 
-Location Based Reminder App
+Location Based Reminder App.
 
 ## Update:
 
