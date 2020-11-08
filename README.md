@@ -6,5 +6,5 @@ Location Based Reminder App.
 
 - Starter files added
 - App name added
-- App icon ongoing
+- App icon added
 - Splash screen ongoing
