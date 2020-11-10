@@ -16,6 +16,7 @@ dependencies:
 
   cupertino_icons: ^1.0.0
   flutter_screenutil: ^3.2.0
+  flappy_search_bar: ^1.7.2
 
 dev_dependencies:
   flutter_test:
