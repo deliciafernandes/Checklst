@@ -7,4 +7,4 @@ Location Based Reminder App.
 - Starter files added
 - App name added
 - App icon added
-- Splash screen ongoing
+- Splash screen added for all ios and android sets
