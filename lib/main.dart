@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'utilities/appTheme.dart';
+import 'utilities/router.dart' as router;
+import 'utilities/routingConstants.dart';
 
 void main() => runApp((Checklst()));
 
@@ -12,12 +15,13 @@ class _ChecklstState extends State<Checklst> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Scaffold(),
-      // initialRoute: Splash.id,
-      // routes: {
-      //   Home.id: (context) => Home(),
-      //   Splash.id: (context) => Splash(),
-      // },
+      theme: AppTheme.lightTheme,
+
+      // Pass the generateRoute function to onGenerateRoute
+      // To define the home view as the starting view, instead of setting the home property to a widget we’ll use initialRoute instead.
+      // initialRoute: ... vs home: ...
+      onGenerateRoute: router.generateRoute,
+      initialRoute: kHomePage,
     );
   }
 }
