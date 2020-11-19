@@ -6,16 +6,15 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String greeting = 'Good Day,';
+  bool _searchPressed = false;
+  String greeting = 'Good Day';
 
   void getGreeting() {
     TimeOfDay now = TimeOfDay.now();
 
     greeting = (now.hour <= 12
         ? 'Good Morning'
-        : (now.hour <= 17 ? 'Good Afternoon,' : 'Good Evening,'));
-
-    print(now.hour);
+        : (now.hour <= 17 ? 'Good Afternoon' : 'Good Evening'));
   }
 
   @override
@@ -26,6 +25,9 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    var _width = MediaQuery.of(context).size.width;
+    var _height = MediaQuery.of(context).size.height;
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0.0,
@@ -44,12 +46,18 @@ class _HomePageState extends State<HomePage> {
         ),
         actions: [
           Container(
-            width: MediaQuery.of(context).size.width - 180.0,
+            width: _width - 180.0,
             //TODO : Find hardcoded width alternative
             margin: EdgeInsets.only(right: 15.0),
             child: TextField(
+              onTap: () {
+                setState(() {
+                  _searchPressed = true;
+                });
+              },
               onChanged: (value) {},
               // controller: editingController,
+              cursorColor: Colors.black,
               decoration: InputDecoration(
                 hintText: "Search reminder...",
                 hintStyle: TextStyle(
@@ -58,8 +66,24 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.grey[350],
                   fontSize: 13.0,
                 ),
-                suffixIcon: Icon(Icons.search),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    Icons.search,
+                    color: _searchPressed ? Colors.black : Colors.grey[500],
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _searchPressed = true;
+                    });
+                  },
+                ),
                 border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.grey[500]),
+                  borderRadius: BorderRadius.all(
+                    Radius.circular(25.0),
+                  ),
+                ),
+                focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.black),
                   borderRadius: BorderRadius.all(
                     Radius.circular(25.0),
@@ -76,88 +100,45 @@ class _HomePageState extends State<HomePage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
+            Text(
+              'Hello Dwayne, $greeting!',
+              style: TextStyle(
+                fontSize: 25.5,
+                fontWeight: FontWeight.w500,
+                fontFamily: 'WorkSans',
+              ),
+            ),
+            SizedBox(height: 3.0),
+            Text(
+              'You have some important tasks to do for today.',
+              style: TextStyle(
+                fontSize: 16.0,
+                fontFamily: 'WorkSans',
+                color: Colors.grey[500],
+              ),
+            ),
+            SizedBox(height: 25.0),
             Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Hello Dwayne',
-                      style: TextStyle(
-                        fontSize: 29.0,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'WorkSans',
-                      ),
-                    ),
-                    Text(
-                      '$greeting',
-                      style: TextStyle(
-                        fontSize: 30.0,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'WorkSans',
-                      ),
-                    ),
-                  ],
-                ),
-                SizedBox(width: 5.0),
-                Expanded(
-                  child: Material(
-                    elevation: 16.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25.0),
-                    ),
-                    child: Container(
-                      height: 65.0,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.all(Radius.circular(25.0)),
-                        image: DecorationImage(
-                          image: NetworkImage(
-                              'https://cdn.pixabay.com/photo/2016/11/29/04/19/beach-1867285_1280.jpg'),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                    ),
+                Text(
+                  'TODAY\'S PRIORITIES',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.w600,
+                    color: Colors.black,
                   ),
                 ),
-              ],
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              'You have some important',
-              style: TextStyle(
-                  fontSize: 15.0,
-                  fontFamily: 'WorkSans',
-                  color: Colors.grey[500]),
-            ),
-            Text(
-              'tasks to do for today.',
-              style: TextStyle(
-                  fontSize: 15.0,
-                  fontFamily: 'WorkSans',
-                  color: Colors.grey[500]),
-            ),
-            SizedBox(height: 20.0),
-            Row(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                RotatedBox(
-                  quarterTurns: 3,
-                  child: Text(
-                    'PINNED',
-                    style: TextStyle(
-                      fontSize: 25.0,
-                      fontFamily: 'WorkSans',
-                      color: Colors.black,
-                      fontWeight: FontWeight.bold,
-                    ),
+                SizedBox(width: 30.0),
+                Text(
+                  'UPCOMING',
+                  style: TextStyle(
+                    fontSize: 20.0,
+                    fontFamily: 'WorkSans',
+                    fontWeight: FontWeight.w600,
+                    color: Colors.grey[350],
                   ),
                 ),
-                Container(
-                  width: 200,
-                  height: 200,
-                  color: Colors.black,
-                )
               ],
             ),
           ],
@@ -166,3 +147,48 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
+
+// Extra widget
+// Expanded(
+// child: Material(
+// elevation: 16.0,
+// shape: RoundedRectangleBorder(
+// borderRadius: BorderRadius.circular(25.0),
+// ),
+// child: Container(
+// height: 65.0,
+// decoration: BoxDecoration(
+// borderRadius: BorderRadius.all(Radius.circular(25.0)),
+// image: DecorationImage(
+// image: NetworkImage(
+// 'https://cdn.pixabay.com/photo/2016/11/29/04/19/beach-1867285_1280.jpg'),
+// fit: BoxFit.cover,
+// ),
+// ),
+// ),
+// ),
+// ),
+
+// Row(
+// crossAxisAlignment: CrossAxisAlignment.center,
+// children: [
+// RotatedBox(
+// quarterTurns: 3,
+// child: Text(
+// 'PINNED',
+// style: TextStyle(
+// fontSize: 25.0,
+// fontFamily: 'WorkSans',
+// color: Colors.black,
+// fontWeight: FontWeight.bold,
+// ),
+// ),
+// ),
+// SizedBox(width: 8.0),
+// Container(
+// width: 200,
+// height: 200,
+// color: Colors.black,
+// )
+// ],
+// ),
