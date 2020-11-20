@@ -9,6 +9,11 @@ class _HomePageState extends State<HomePage> {
   bool _searchPressed = false;
   String greeting = 'Good Day';
 
+  int _index = 1;
+  List<Widget> _widgetList = [
+    // WhatToDoBody(),
+  ];
+
   void getGreeting() {
     TimeOfDay now = TimeOfDay.now();
 
@@ -26,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     var _width = MediaQuery.of(context).size.width;
-    var _height = MediaQuery.of(context).size.height;
+    // var _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
       appBar: AppBar(
@@ -141,9 +146,39 @@ class _HomePageState extends State<HomePage> {
                 ),
               ],
             ),
+            // _widgetList[_index],
           ],
         ),
       ),
+      // bottomNavigationBar: BottomNavigationBar(
+      //   type: BottomNavigationBarType.fixed,
+      //   currentIndex: _index,
+      //   backgroundColor: Colors.white,
+      //   selectedItemColor: Colors.black,
+      //   iconSize: 20.0,
+      //   onTap: (int index) {
+      //     setState(() {
+      //       _index = index;
+      //     });
+      //   },
+      //   items: [
+      //     BottomNavigationBarItem(
+      //         icon: Image.asset(
+      //           "assets/images/ChecklstLogo.png",
+      //           width: 20.0,
+      //         ),
+      //         label: 'Reminders'),
+      //     BottomNavigationBarItem(
+      //       icon: Icon(
+      //         Icons.add,
+      //       ),
+      //       label: "Add Reminder",
+      //     ),
+      //     // BottomNavigationBarItem(
+      //     //     icon: Icon(Icons.account_circle), label: "Account"),
+      //     BottomNavigationBarItem(icon: Icon(Icons.face), label: "Account"),
+      //   ],
+      // ),
     );
   }
 }
