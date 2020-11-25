@@ -11,7 +11,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   bool _searchPressed = false;
 
-  int _index = 0;
+  int _index = 1;
   List<Widget> _widgetList = [
     RemindersBody(),
     AccountBody(),
@@ -101,7 +101,7 @@ class _HomePageState extends State<HomePage> {
           });
         },
         items: [
-          FABBottomAppBarItem(iconData: Icons.home, text: 'Reminders'),
+          FABBottomAppBarItem(iconData: Icons.menu, text: 'Reminders'),
           FABBottomAppBarItem(iconData: Icons.face, text: 'Account'),
         ],
       ),
@@ -122,30 +122,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-
-// bottomNavigationBar: BottomNavigationBar(
-//   type: BottomNavigationBarType.fixed,
-//   backgroundColor: ,
-//   selectedItemColor: ,
-//   iconSize: 20.0,
-//   onTap: (int index) {
-//     setState(() {
-//       _index = index;
-//     });
-//   },
-//   items: [
-//     BottomNavigationBarItem(
-
-//         ),
-//         label: 'Reminders'),
-//     BottomNavigationBarItem(
-//       icon: Icon(
-//         Icons.add,
-//       ),
-//       label: "",
-//     ),
-//     // BottomNavigationBarItem(
-//     //     icon: Icon(Icons.account_circle), label: "Account"),
-//     BottomNavigationBarItem(icon: Icon(Icons.face), label: "Account"),
-//   ],
-// ),
