@@ -1,7 +1,7 @@
 import 'package:checklst/widgets/FABBottomAppBar.dart';
 import 'package:flutter/material.dart';
-import 'accountBody.dart';
-import 'remindersBody.dart';
+import 'accountView.dart';
+import 'remindersView.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,9 +13,8 @@ class _HomePageState extends State<HomePage> {
 
   int _index = 1;
   List<Widget> _widgetList = [
-    RemindersBody(),
-    RemindersBody(),
-    // AccountBody(),
+    RemindersView(),
+    AccountView(),
   ];
 
   @override

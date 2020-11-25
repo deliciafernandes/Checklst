@@ -1,13 +1,14 @@
-// import 'package:firebase_auth/firebase_auth.dart';
-// import "package:flutter/material.dart";
-// import 'package:modal_progress_hud/modal_progress_hud.dart';
-// import 'package:road_safety/utilities/constants.dart';
-// import 'package:road_safety/views/mainPage.dart';
-//
-// // screens
-// import 'forgot_password_screen.dart';
-//
+import 'package:firebase_auth/firebase_auth.dart';
+import "package:flutter/material.dart";
+
+class AccountView extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Column();
+  }
+}
 // class LoginScreenBody extends StatefulWidget {
+//
 //   @override
 //   _LoginScreenBodyState createState() => _LoginScreenBodyState();
 // }

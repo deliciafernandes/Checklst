@@ -41,6 +41,11 @@ class NoRemindersBody extends StatelessWidget {
             color: Colors.grey[500],
           ),
         ),
+        SizedBox(height: 10.0),
+        Icon(
+          Icons.keyboard_arrow_down,
+          color: Colors.grey[500],
+        ),
       ],
     );
   }

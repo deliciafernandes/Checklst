@@ -1,14 +1,14 @@
 import 'package:checklst/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'noRemindersBody.dart';
+import 'bodyWidgets/noRemindersBody.dart';
 
-class RemindersBody extends StatefulWidget {
+class RemindersView extends StatefulWidget {
   @override
-  _RemindersBodyState createState() => _RemindersBodyState();
+  _RemindersViewState createState() => _RemindersViewState();
 }
 
-class _RemindersBodyState extends State<RemindersBody> {
+class _RemindersViewState extends State<RemindersView> {
   String greeting = 'Good Day';
   String _isClicked = 'today\'s priorities';
   bool _remindersExist = false;
