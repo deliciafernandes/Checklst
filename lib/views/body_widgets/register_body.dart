@@ -1,3 +1,4 @@
+import 'package:checklst/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -60,126 +61,92 @@ class _RegisterBodyState extends State<RegisterBody> {
           valueColor: new AlwaysStoppedAnimation<Color>(Colors.black)),
       child: SingleChildScrollView(
         child: Padding(
-          padding: EdgeInsets.only(top: 5.0, left: 22.0, right: 22.0),
-          // padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
           child: Column(
-            mainAxisSize: MainAxisSize.min,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
               Text(
-                'Create Your Account',
+                'Create Your Account,',
                 style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.black,
-                  fontWeight: FontWeight.w600,
-                  fontFamily: 'Merriweather',
+                  fontSize: 25.5,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'WorkSans',
                 ),
               ),
-              SizedBox(height: 10.0),
+              SizedBox(height: 3.0),
               Text(
                 'Sign up and get started',
                 style: TextStyle(
-                  fontSize: 15.0,
+                  fontSize: 16.0,
+                  fontFamily: 'WorkSans',
                   color: Colors.grey[500],
-                  fontFamily: 'Merriweather',
                 ),
               ),
-              SizedBox(height: 30.0),
-              Image.asset(
-                'assets/images/coffee.png',
-                width: MediaQuery.of(context).size.width / 3,
-                height: MediaQuery.of(context).size.width / 3,
+              Container(
+                margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                width: 220.0,
+                height: 220.0,
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                    image: AssetImage('assets/images/register.png'),
+                    fit: BoxFit.contain,
+                  ),
+                ),
               ),
               Form(
                 key: _formKey,
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Padding(
-                      padding: const EdgeInsets.only(top: 15.0),
-                      child: Material(
-                        elevation: 3.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: "Email",
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            contentPadding: EdgeInsets.only(
-                                left: 15, bottom: 11, top: 11, right: 15),
-                          ),
-                          controller: _emailController,
-                          textInputAction: TextInputAction.next,
-                          keyboardType: TextInputType.emailAddress,
-                          cursorColor: Colors.black,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              setState(() {
-                                _showSpinner = false;
-                              });
-                              return "Please enter email";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
+                    CustomTextFormField(
+                      labelText: 'Name',
+                      textInputType: TextInputType.name,
+                      obscureText: false,
+                      errorText: 'Please enter your name',
+                      controller: _nameController,
                     ),
                     Padding(
-                      padding: const EdgeInsets.only(top: 15.0, bottom: 20.0),
-                      child: Material(
-                        elevation: 3.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: "Password",
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            contentPadding: EdgeInsets.only(
-                                left: 15, bottom: 11, top: 11, right: 15),
-                          ),
-                          controller: _passwordController,
-                          textInputAction: TextInputAction.done,
+                      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: CustomTextFormField(
+                          labelText: 'Email',
+                          textInputType: TextInputType.emailAddress,
+                          obscureText: false,
+                          errorText: 'Please input email address',
+                          controller: _emailController),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(bottom: 10.0),
+                      child: CustomTextFormField(
+                          labelText: 'Password',
                           obscureText: true,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              setState(() {
-                                _showSpinner = false;
-                              });
-                              return "Please enter password";
-                            }
-                            return null;
-                          },
+                          errorText: 'Please input password',
+                          controller: _passwordController),
+                    ),
+                    SizedBox(height: 30.0),
+                    ButtonTheme(
+                      minWidth: MediaQuery.of(context).size.width / 1.5,
+                      height: 50.0,
+                      child: RaisedButton(
+                        elevation: 10.0,
+                        color: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        padding: EdgeInsets.only(
+                            left: 15, bottom: 11, top: 11, right: 15),
+                        onPressed: _submit,
+                        child: Text(
+                          'Sign up',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                       ),
                     ),
-                    RaisedButton(
-                      elevation: 10.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      padding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      onPressed: _submit,
-                      child: Text(
-                        'Sign up',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                          fontFamily: 'Merriweather',
-                        ),
-                      ),
-                    ),
-                    SizedBox(height: 40.0),
+                    SizedBox(height: 30.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -187,27 +154,22 @@ class _RegisterBodyState extends State<RegisterBody> {
                           "Already have an account? ",
                           style: TextStyle(
                             color: Colors.grey,
+                            fontFamily: 'WorkSans',
                           ),
                         ),
                         GestureDetector(
                           child: Text(
                             "Sign In",
                             style: TextStyle(
-                              fontFamily: 'Merriweather',
+                              fontFamily: 'WorkSans',
                             ),
                           ),
                           onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) => LoginScreenBody(),
-                            //   ),
-                            // );
+                            Navigator.pop(context);
                           },
                         ),
                       ],
                     ),
-                    SizedBox(height: 100.0),
                   ],
                 ),
               ),

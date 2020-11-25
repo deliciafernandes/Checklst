@@ -1,3 +1,4 @@
+import 'package:checklst/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
@@ -76,14 +77,15 @@ class _LoginBodyState extends State<LoginBody> {
                 ),
               ),
               Container(
-                width: 100.0,
-                height: 100.0,
-                padding: EdgeInsets.symmetric(vertical: 20.0),
+                margin: EdgeInsets.symmetric(vertical: 20.0),
+                width: 250.0,
+                height: 250.0,
                 alignment: Alignment.center,
                 decoration: BoxDecoration(
                   image: DecorationImage(
-                      image: AssetImage('assets/images/login.png'),
-                      fit: BoxFit.fill),
+                    image: AssetImage('assets/images/login.png'),
+                    fit: BoxFit.contain,
+                  ),
                 ),
               ),
               Form(
@@ -91,69 +93,19 @@ class _LoginBodyState extends State<LoginBody> {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
-                    Material(
-                      elevation: 3.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: TextFormField(
-                        decoration: const InputDecoration(
-                          labelText: "Email",
-                          border: InputBorder.none,
-                          focusedBorder: InputBorder.none,
-                          enabledBorder: InputBorder.none,
-                          errorBorder: InputBorder.none,
-                          disabledBorder: InputBorder.none,
-                          contentPadding: EdgeInsets.only(
-                              left: 15, bottom: 11, top: 11, right: 15),
-                        ),
-                        controller: _emailController,
-                        textInputAction: TextInputAction.next,
-                        keyboardType: TextInputType.emailAddress,
-                        cursorColor: Colors.black,
-                        validator: (value) {
-                          if (value.isEmpty) {
-                            setState(() {
-                              _showSpinner = false;
-                            });
-                            return "Please enter email";
-                          }
-                          return null;
-                        },
-                      ),
-                    ),
+                    CustomTextFormField(
+                        labelText: 'Email',
+                        textInputType: TextInputType.emailAddress,
+                        obscureText: false,
+                        errorText: 'Please input email address',
+                        controller: _emailController),
                     Padding(
-                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-                      child: Material(
-                        elevation: 3.0,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: TextFormField(
-                          decoration: const InputDecoration(
-                            labelText: "Password",
-                            border: InputBorder.none,
-                            focusedBorder: InputBorder.none,
-                            enabledBorder: InputBorder.none,
-                            errorBorder: InputBorder.none,
-                            disabledBorder: InputBorder.none,
-                            contentPadding: EdgeInsets.only(
-                                left: 15, bottom: 11, top: 11, right: 15),
-                          ),
-                          controller: _passwordController,
-                          textInputAction: TextInputAction.done,
+                      padding: const EdgeInsets.only(top: 10.0, bottom: 10.0),
+                      child: CustomTextFormField(
+                          labelText: 'Password',
                           obscureText: true,
-                          validator: (value) {
-                            if (value.isEmpty) {
-                              setState(() {
-                                _showSpinner = false;
-                              });
-                              return "Please enter password";
-                            }
-                            return null;
-                          },
-                        ),
-                      ),
+                          errorText: 'Please input password',
+                          controller: _passwordController),
                     ),
                     GestureDetector(
                       child: Text(
@@ -161,6 +113,7 @@ class _LoginBodyState extends State<LoginBody> {
                         textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Colors.grey,
+                          fontFamily: 'WorkSans',
                         ),
                       ),
                       onTap: () {
@@ -173,24 +126,29 @@ class _LoginBodyState extends State<LoginBody> {
                       },
                     ),
                     SizedBox(height: 30.0),
-                    RaisedButton(
-                      elevation: 10.0,
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      padding: EdgeInsets.only(
-                          left: 15, bottom: 11, top: 11, right: 15),
-                      onPressed: _submit,
-                      child: Text(
-                        'Log in',
-                        style: TextStyle(
-                          fontSize: 20.0,
-                          color: Colors.white,
-                          fontFamily: 'Merriweather',
+                    ButtonTheme(
+                      minWidth: MediaQuery.of(context).size.width / 1.5,
+                      height: 50.0,
+                      child: RaisedButton(
+                        elevation: 10.0,
+                        color: Colors.black,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25.0),
+                        ),
+                        padding: EdgeInsets.only(
+                            left: 15, bottom: 11, top: 11, right: 15),
+                        onPressed: _submit,
+                        child: Text(
+                          'Log in',
+                          style: TextStyle(
+                            fontSize: 20.0,
+                            color: Colors.white,
+                            fontFamily: 'WorkSans',
+                          ),
                         ),
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    SizedBox(height: 30.0),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: <Widget>[
@@ -198,13 +156,14 @@ class _LoginBodyState extends State<LoginBody> {
                           "Don't have an account? ",
                           style: TextStyle(
                             color: Colors.grey,
+                            fontFamily: 'WorkSans',
                           ),
                         ),
                         GestureDetector(
                           child: Text(
                             "Sign Up",
                             style: TextStyle(
-                              fontFamily: 'Merriweather',
+                              fontFamily: 'WorkSans',
                             ),
                           ),
                           onTap: () {
