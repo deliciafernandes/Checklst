@@ -1,9 +1,15 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'utilities/appTheme.dart';
 import 'utilities/router.dart' as router;
 import 'utilities/routingConstants.dart';
 
-void main() => runApp((Checklst()));
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+
+  runApp(Checklst());
+}
 
 class Checklst extends StatefulWidget {
   @override
