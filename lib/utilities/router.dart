@@ -1,5 +1,5 @@
-import 'package:checklst/screens/mainNavPage.dart';
-import 'package:checklst/screens/undefinedView.dart';
+import 'package:checklst/views/mainNavPage.dart';
+import 'package:checklst/views/undefinedView.dart';
 import 'package:flutter/material.dart';
 import 'routingConstants.dart';
 

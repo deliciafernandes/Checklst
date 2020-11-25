@@ -1,4 +1,4 @@
-import 'package:checklst/customWidgets/FABBottomAppBar.dart';
+import 'package:checklst/widgets/FABBottomAppBar.dart';
 import 'package:flutter/material.dart';
 import 'accountBody.dart';
 import 'remindersBody.dart';

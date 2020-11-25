@@ -39,3 +39,7 @@ app.*.symbols
 
 # Obfuscation related
 app.*.map.json
+
+checklst/android/app/google-services.json
+*.json
+android/app/google-services.json
