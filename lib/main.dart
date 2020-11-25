@@ -21,7 +21,7 @@ class _ChecklstState extends State<Checklst> {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+      theme: AppTheme.lightTheme.copyWith(canvasColor: Colors.transparent),
 
       // Pass the generateRoute function to onGenerateRoute
       // To define the home view as the starting view, instead of setting the home property to a widget we’ll use initialRoute instead.

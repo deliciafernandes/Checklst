@@ -36,6 +36,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
           enabledBorder: InputBorder.none,
           errorBorder: InputBorder.none,
           disabledBorder: InputBorder.none,
+          fillColor: Colors.white,
           labelStyle: TextStyle(
             color: Colors.grey,
             fontFamily: 'WorkSans',

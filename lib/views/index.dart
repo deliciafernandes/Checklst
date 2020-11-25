@@ -1,3 +1,4 @@
+import 'package:checklst/widgets/bottom_reminder_sheet.dart';
 import 'package:checklst/widgets/fab_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'account_view.dart';
@@ -108,8 +109,11 @@ class _IndexViewState extends State<IndexView> {
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          //TODO: add reminder functionality
-          print('pressed');
+          showModalBottomSheet(
+            context: context,
+            builder: (context) =>
+                BottomReminderSheet(taskTitleCallBack: (newTaskText) {}),
+          );
         },
         highlightElevation: 3.0,
         child: Icon(
