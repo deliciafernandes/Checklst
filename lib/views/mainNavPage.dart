@@ -14,7 +14,8 @@ class _HomePageState extends State<HomePage> {
   int _index = 1;
   List<Widget> _widgetList = [
     RemindersBody(),
-    AccountBody(),
+    RemindersBody(),
+    // AccountBody(),
   ];
 
   @override
