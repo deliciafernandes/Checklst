@@ -75,12 +75,12 @@ class ReminderTile extends StatelessWidget {
             child: Row(
               children: [
                 Icon(
-                  Icons.location_on_outlined,
+                  Icons.schedule,
                   size: 18.0,
                   color: Colors.grey[350],
                 ),
                 Text(
-                  'Location',
+                  ' Time',
                   style: TextStyle(
                     fontSize: 15.0,
                     fontFamily: 'WorkSans',
@@ -88,6 +88,20 @@ class ReminderTile extends StatelessWidget {
                     color: Colors.grey[350],
                   ),
                 ),
+                // Icon(
+                //   Icons.location_on_outlined,
+                //   size: 18.0,
+                //   color: Colors.grey[350],
+                // ),
+                // Text(
+                //   'Location',
+                //   style: TextStyle(
+                //     fontSize: 15.0,
+                //     fontFamily: 'WorkSans',
+                //     fontWeight: FontWeight.w600,
+                //     color: Colors.grey[350],
+                //   ),
+                // ),
               ],
             ),
           ),
