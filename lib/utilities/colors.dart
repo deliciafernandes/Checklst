@@ -9,6 +9,5 @@ List<Color> colorsList = [
   Color(0xff7ECBFF),
   Color(0xffFFC122),
   Color(0xff1CCCC2),
-  Color(0xffFFEEF4),
   // Color(0xff),
 ];

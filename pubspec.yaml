@@ -39,15 +39,7 @@ flutter:
   fonts:
     - family: Playfair
       fonts:
-        - asset: assets/fonts/PlayfairDisplay-Black.ttf
-          weight: 900
-        - asset: assets/fonts/PlayfairDisplay-Bold.ttf
-          weight: 700
         - asset: assets/fonts/PlayfairDisplay-Regular.ttf
     - family: WorkSans
       fonts:
-        - asset: assets/fonts/WorkSans-Black.ttf
-          weight: 900
-        - asset: assets/fonts/WorkSans-Bold.ttf
-          weight: 700
         - asset: assets/fonts/WorkSans-Regular.ttf
