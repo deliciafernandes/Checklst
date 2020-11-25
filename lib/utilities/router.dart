@@ -1,4 +1,4 @@
-import 'package:checklst/screens/homePage.dart';
+import 'package:checklst/screens/mainNavPage.dart';
 import 'package:checklst/screens/undefinedView.dart';
 import 'package:flutter/material.dart';
 import 'routingConstants.dart';
