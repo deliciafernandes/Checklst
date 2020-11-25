@@ -1,4 +1,4 @@
-import 'package:checklst/views/mainNavPage.dart';
+import 'package:checklst/views/mainNavView.dart';
 import 'package:checklst/views/undefinedView.dart';
 import 'package:flutter/material.dart';
 import 'routingConstants.dart';

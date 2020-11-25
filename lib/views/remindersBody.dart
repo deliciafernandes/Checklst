@@ -1,6 +1,8 @@
 import 'package:checklst/utilities/constants.dart';
 import 'package:flutter/material.dart';
 
+import 'noRemindersBody.dart';
+
 class RemindersBody extends StatefulWidget {
   @override
   _RemindersBodyState createState() => _RemindersBodyState();
@@ -9,6 +11,7 @@ class RemindersBody extends StatefulWidget {
 class _RemindersBodyState extends State<RemindersBody> {
   String greeting = 'Good Day';
   String _isClicked = 'today\'s priorities';
+  bool _remindersExist = false;
 
   void getGreeting() {
     TimeOfDay now = TimeOfDay.now();
@@ -55,41 +58,49 @@ class _RemindersBodyState extends State<RemindersBody> {
               ),
             ),
           ),
-          SizedBox(height: 25.0),
-          Row(
-            children: [
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _isClicked = 'today\'s priorities';
-                  });
-                },
-                child: Text(
-                  'TODAY\'S PRIORITIES',
-                  style: _isClicked == 'today\'s priorities'
-                      ? kActiveTextStyle
-                      : kInactiveTextStyle,
-                ),
-              ),
-              SizedBox(width: 30.0),
-              GestureDetector(
-                onTap: () {
-                  setState(() {
-                    _isClicked = 'upcoming';
-                  });
-                },
-                child: Text(
-                  'UPCOMING',
-                  style: _isClicked == 'today\'s priorities'
-                      ? kInactiveTextStyle
-                      : kActiveTextStyle,
-                ),
-              ),
-            ],
-          ),
-          // _isClicked == 'today\'s priorities'
-          //     ? Container(color: Colors.black, width: 200, height: 200)
-          //     : Container(color: Colors.pink, width: 200, height: 200),
+          (_remindersExist)
+              ? Column(
+                  children: [
+                    SizedBox(height: 25.0),
+                    Row(
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isClicked = 'today\'s priorities';
+                            });
+                          },
+                          child: Text(
+                            'TODAY\'S PRIORITIES',
+                            style: _isClicked == 'today\'s priorities'
+                                ? kActiveTextStyle
+                                : kInactiveTextStyle,
+                          ),
+                        ),
+                        SizedBox(width: 30.0),
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              _isClicked = 'upcoming';
+                            });
+                          },
+                          child: Text(
+                            'UPCOMING',
+                            style: _isClicked == 'today\'s priorities'
+                                ? kInactiveTextStyle
+                                : kActiveTextStyle,
+                          ),
+                        ),
+                      ],
+                    ),
+                    (_isClicked == 'today\'s priorities'
+                        ? Container(
+                            color: Colors.black, width: 200, height: 200)
+                        : Container(
+                            color: Colors.pink, width: 200, height: 200))
+                  ],
+                )
+              : NoRemindersBody(),
         ],
       ),
     );
