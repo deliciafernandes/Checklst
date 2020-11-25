@@ -1,4 +1,6 @@
 import 'package:checklst/utilities/constants.dart';
+import 'package:checklst/views/body_widgets/todays_priorities_body.dart';
+import 'package:checklst/views/body_widgets/upcoming_body.dart';
 import 'package:flutter/material.dart';
 import 'body_widgets/no_reminders_body.dart';
 
@@ -10,7 +12,7 @@ class RemindersView extends StatefulWidget {
 class _RemindersViewState extends State<RemindersView> {
   String greeting = 'Good Day';
   String _isClicked = 'today\'s priorities';
-  bool _remindersExist = false;
+  bool _remindersExist = true;
 
   void getGreeting() {
     TimeOfDay now = TimeOfDay.now();
@@ -93,10 +95,8 @@ class _RemindersViewState extends State<RemindersView> {
                       ],
                     ),
                     (_isClicked == 'today\'s priorities'
-                        ? Container(
-                            color: Colors.black, width: 200, height: 200)
-                        : Container(
-                            color: Colors.pink, width: 200, height: 200))
+                        ? TodaysPrioritiesBody()
+                        : UpcomingBody()),
                   ],
                 )
               : NoRemindersBody(),
