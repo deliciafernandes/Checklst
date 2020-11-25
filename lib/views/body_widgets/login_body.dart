@@ -49,88 +49,56 @@ class _LoginBodyState extends State<LoginBody> {
     return ModalProgressHUD(
       inAsyncCall: _showSpinner,
       color: Colors.transparent,
-      child: Padding(
-        padding: EdgeInsets.all(22.0),
-        // padding: EdgeInsets.only(top: 20.0, bottom: 20.0),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 40.0,
-            ),
-            Text(
-              'Welcome Back,',
-              style: TextStyle(
-                fontSize: 25.0,
-                color: Colors.black,
-                fontWeight: FontWeight.w600,
-                fontFamily: 'Merriweather',
+      progressIndicator: CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.black)),
+      child: SingleChildScrollView(
+        child: Padding(
+          padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              Text(
+                'Welcome Back,',
+                style: TextStyle(
+                  fontSize: 25.5,
+                  fontWeight: FontWeight.w500,
+                  fontFamily: 'WorkSans',
+                ),
               ),
-            ),
-            SizedBox(height: 10.0),
-            Text(
-              'Login to continue',
-              style: TextStyle(
-                fontSize: 15.0,
-                color: Colors.grey[500],
-                fontFamily: 'Merriweather',
+              SizedBox(height: 3.0),
+              Text(
+                'Login to save your reminders on all devices',
+                style: TextStyle(
+                  fontSize: 16.0,
+                  fontFamily: 'WorkSans',
+                  color: Colors.grey[500],
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 30.0),
-              child: Image.asset(
-                'assets/images/laying.png',
-                width: MediaQuery.of(context).size.width / 3,
-                height: MediaQuery.of(context).size.width / 3,
+              Container(
+                width: 100.0,
+                height: 100.0,
+                padding: EdgeInsets.symmetric(vertical: 20.0),
+                alignment: Alignment.center,
+                decoration: BoxDecoration(
+                  image: DecorationImage(
+                      image: AssetImage('assets/images/login.png'),
+                      fit: BoxFit.fill),
+                ),
               ),
-            ),
-            Form(
-              key: _formKey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Material(
-                    elevation: 3.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: TextFormField(
-                      decoration: const InputDecoration(
-                        labelText: "Email",
-                        border: InputBorder.none,
-                        focusedBorder: InputBorder.none,
-                        enabledBorder: InputBorder.none,
-                        errorBorder: InputBorder.none,
-                        disabledBorder: InputBorder.none,
-                        contentPadding: EdgeInsets.only(
-                            left: 15, bottom: 11, top: 11, right: 15),
-                      ),
-                      controller: _emailController,
-                      textInputAction: TextInputAction.next,
-                      keyboardType: TextInputType.emailAddress,
-                      cursorColor: Colors.black,
-                      validator: (value) {
-                        if (value.isEmpty) {
-                          setState(() {
-                            _showSpinner = false;
-                          });
-                          return "Please enter email";
-                        }
-                        return null;
-                      },
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
-                    child: Material(
+              Form(
+                key: _formKey,
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    Material(
                       elevation: 3.0,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: TextFormField(
                         decoration: const InputDecoration(
-                          labelText: "Password",
+                          labelText: "Email",
                           border: InputBorder.none,
                           focusedBorder: InputBorder.none,
                           enabledBorder: InputBorder.none,
@@ -139,83 +107,117 @@ class _LoginBodyState extends State<LoginBody> {
                           contentPadding: EdgeInsets.only(
                               left: 15, bottom: 11, top: 11, right: 15),
                         ),
-                        controller: _passwordController,
-                        textInputAction: TextInputAction.done,
-                        obscureText: true,
+                        controller: _emailController,
+                        textInputAction: TextInputAction.next,
+                        keyboardType: TextInputType.emailAddress,
+                        cursorColor: Colors.black,
                         validator: (value) {
                           if (value.isEmpty) {
                             setState(() {
                               _showSpinner = false;
                             });
-                            return "Please enter password";
+                            return "Please enter email";
                           }
                           return null;
                         },
                       ),
                     ),
-                  ),
-                  GestureDetector(
-                    child: Text(
-                      "Forgot Password?",
-                      textAlign: TextAlign.right,
-                      style: TextStyle(
-                        color: Colors.grey,
+                    Padding(
+                      padding: const EdgeInsets.only(top: 20.0, bottom: 10.0),
+                      child: Material(
+                        elevation: 3.0,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10.0),
+                        ),
+                        child: TextFormField(
+                          decoration: const InputDecoration(
+                            labelText: "Password",
+                            border: InputBorder.none,
+                            focusedBorder: InputBorder.none,
+                            enabledBorder: InputBorder.none,
+                            errorBorder: InputBorder.none,
+                            disabledBorder: InputBorder.none,
+                            contentPadding: EdgeInsets.only(
+                                left: 15, bottom: 11, top: 11, right: 15),
+                          ),
+                          controller: _passwordController,
+                          textInputAction: TextInputAction.done,
+                          obscureText: true,
+                          validator: (value) {
+                            if (value.isEmpty) {
+                              setState(() {
+                                _showSpinner = false;
+                              });
+                              return "Please enter password";
+                            }
+                            return null;
+                          },
+                        ),
                       ),
                     ),
-                    onTap: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: (context) => ForgotPassword(),
-                      //   ),
-                      // );
-                    },
-                  ),
-                  SizedBox(height: 30.0),
-                  RaisedButton(
-                    elevation: 10.0,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    padding: EdgeInsets.only(
-                        left: 15, bottom: 11, top: 11, right: 15),
-                    onPressed: _submit,
-                    child: Text(
-                      'Log in',
-                      style: TextStyle(
-                        fontSize: 20.0,
-                        color: Colors.white,
-                        fontFamily: 'Merriweather',
-                      ),
-                    ),
-                  ),
-                  SizedBox(height: 40.0),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: <Widget>[
-                      Text(
-                        "Don't have an account? ",
+                    GestureDetector(
+                      child: Text(
+                        "Forgot Password?",
+                        textAlign: TextAlign.right,
                         style: TextStyle(
                           color: Colors.grey,
                         ),
                       ),
-                      GestureDetector(
-                        child: Text(
-                          "Sign Up",
+                      onTap: () {
+                        // Navigator.push(
+                        //   context,
+                        //   MaterialPageRoute(
+                        //     builder: (context) => ForgotPassword(),
+                        //   ),
+                        // );
+                      },
+                    ),
+                    SizedBox(height: 30.0),
+                    RaisedButton(
+                      elevation: 10.0,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      padding: EdgeInsets.only(
+                          left: 15, bottom: 11, top: 11, right: 15),
+                      onPressed: _submit,
+                      child: Text(
+                        'Log in',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          color: Colors.white,
+                          fontFamily: 'Merriweather',
+                        ),
+                      ),
+                    ),
+                    SizedBox(height: 40.0),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Text(
+                          "Don't have an account? ",
                           style: TextStyle(
-                            fontFamily: 'Merriweather',
+                            color: Colors.grey,
                           ),
                         ),
-                        onTap: () {
-                          Navigator.pop(context);
-                        },
-                      ),
-                    ],
-                  ),
-                ],
+                        GestureDetector(
+                          child: Text(
+                            "Sign Up",
+                            style: TextStyle(
+                              fontFamily: 'Merriweather',
+                            ),
+                          ),
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

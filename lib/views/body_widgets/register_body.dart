@@ -56,6 +56,8 @@ class _RegisterBodyState extends State<RegisterBody> {
     return ModalProgressHUD(
       inAsyncCall: _showSpinner,
       color: Colors.transparent,
+      progressIndicator: CircularProgressIndicator(
+          valueColor: new AlwaysStoppedAnimation<Color>(Colors.black)),
       child: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.only(top: 5.0, left: 22.0, right: 22.0),
