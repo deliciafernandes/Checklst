@@ -1,14 +1,14 @@
-import 'package:checklst/widgets/FABBottomAppBar.dart';
+import 'package:checklst/widgets/fab_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
-import 'accountView.dart';
-import 'remindersView.dart';
+import 'account_view.dart';
+import 'reminders_view.dart';
 
-class HomePage extends StatefulWidget {
+class IndexView extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _IndexViewState createState() => _IndexViewState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _IndexViewState extends State<IndexView> {
   bool _searchPressed = false;
 
   int _index = 1;

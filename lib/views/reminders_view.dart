@@ -1,7 +1,6 @@
 import 'package:checklst/utilities/constants.dart';
 import 'package:flutter/material.dart';
-
-import 'bodyWidgets/noRemindersBody.dart';
+import 'body_widgets/no_reminders_ody.dart';
 
 class RemindersView extends StatefulWidget {
   @override

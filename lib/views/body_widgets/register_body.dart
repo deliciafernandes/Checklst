@@ -12,7 +12,6 @@ class _RegisterBodyState extends State<RegisterBody> {
   bool _showSpinner = false;
 
   final _nameController = TextEditingController();
-  final _carPlateController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 

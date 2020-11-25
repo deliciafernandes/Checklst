@@ -1,8 +1,8 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'utilities/appTheme.dart';
+import 'utilities/app_theme.dart';
 import 'utilities/router.dart' as router;
-import 'utilities/routingConstants.dart';
+import 'utilities/routing_constants.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -27,7 +27,7 @@ class _ChecklstState extends State<Checklst> {
       // To define the home view as the starting view, instead of setting the home property to a widget we’ll use initialRoute instead.
       // initialRoute: ... vs home: ...
       onGenerateRoute: router.generateRoute,
-      initialRoute: kHomePage,
+      initialRoute: kIndexView,
     );
   }
 }

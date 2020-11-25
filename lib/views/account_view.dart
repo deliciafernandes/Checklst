@@ -1,7 +1,6 @@
-import 'package:checklst/views/bodyWidgets/loginBody.dart';
-import 'package:checklst/views/bodyWidgets/registerBody.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import "package:flutter/material.dart";
+
+import 'body_widgets/register_body.dart';
 
 class AccountView extends StatefulWidget {
   @override

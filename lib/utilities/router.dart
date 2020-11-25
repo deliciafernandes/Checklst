@@ -1,15 +1,15 @@
-import 'package:checklst/views/mainNavView.dart';
-import 'package:checklst/views/undefinedView.dart';
+import 'package:checklst/views/index.dart';
+import 'package:checklst/views/undefined_view.dart';
 import 'package:flutter/material.dart';
-import 'routingConstants.dart';
+import 'routing_constants.dart';
 
 // The MaterialApp provides you with a property called onGenerateRoute where you can pass in a Function that returns a Route<dynamic> and takes in RouteSettings.
 Route<dynamic> generateRoute(RouteSettings settings) {
   // The settings contain the route information of the requested route. It provides two key things to us: the name and the arguments.
 
   switch (settings.name) {
-    case kHomePage:
-      return MaterialPageRoute(builder: (_) => HomePage());
+    case kIndexView:
+      return MaterialPageRoute(builder: (_) => IndexView());
     // case '/feed':
     //   return MaterialPageRoute(builder: (_) => Feed());
     default:
