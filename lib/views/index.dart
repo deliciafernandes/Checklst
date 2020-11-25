@@ -119,6 +119,8 @@ class _IndexViewState extends State<IndexView> {
         elevation: 2.0,
         backgroundColor: Colors.white,
       ),
+      extendBody:
+          true, // ensures that that scaffold's body will be visible through the bottom navigation bar's notch
     );
   }
 }
