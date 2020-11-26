@@ -5,11 +5,11 @@ import 'reminder.dart';
 
 class ReminderDB extends ChangeNotifier {
   List<Reminder> _reminderList = [
-    Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
-        date: 'Today',
-        time: '17:00 pm'),
+    // Reminder(
+    //     title: 'Reminder Title',
+    //     description: 'Reminder description',
+    //     date: 'Today',
+    //     time: '17:00 pm'),
   ];
 
   UnmodifiableListView<Reminder> get reminderList {

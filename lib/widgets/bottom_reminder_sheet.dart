@@ -17,6 +17,14 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
   String date;
   String time;
 
+  void formatDate() {
+    DateTime parsedDate = DateTime.parse(date);
+    print(parsedDate);
+
+    var newFormat = DateFormat("d MMM y");
+    date = newFormat.format(parsedDate);
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -55,7 +63,6 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 SizedBox(height: 10.0),
                 DateTimePicker(
                   type: DateTimePickerType.date,
-                  // dateMask: 'dd/MM/yyyy',
                   dateMask: 'd MMM, yyyy',
                   // initialValue: '26 Nov,2020',
                   firstDate: DateTime(2000),
@@ -64,7 +71,6 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   dateLabelText: 'Date',
                   onChanged: (val) {
                     date = val;
-                    print(date);
                   },
                   validator: (val) {
                     return null;
@@ -99,6 +105,8 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   padding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   onPressed: () {
+                    formatDate();
+
                     Provider.of<ReminderDB>(context, listen: false).addReminder(
                         titleTextController.text,
                         descriptionTextController.text,
