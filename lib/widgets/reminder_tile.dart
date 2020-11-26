@@ -27,113 +27,118 @@ class ReminderTile extends StatelessWidget {
   Widget build(BuildContext context) {
     Color _color = colorsList[_random.nextInt(colorsList.length)];
 
-    return Slidable(
-      actionPane: SlidableDrawerActionPane(),
-      actionExtentRatio: 0.25,
-      child: Container(
-        width: MediaQuery.of(context).size.width,
-        height: 110.0,
-        margin: EdgeInsets.only(top: 10.0),
-        padding: EdgeInsets.only(
-          top: 20.0,
-          left: 20.0,
-        ),
-        decoration: BoxDecoration(
-          border: Border.all(color: Colors.grey[300], width: 2.0),
-          borderRadius: BorderRadius.all(Radius.circular(20.0)),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Expanded(
-                  child: Text(
-                    title,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 3,
-                    style: TextStyle(
-                      fontSize: 16.0,
-                      fontFamily: 'WorkSans',
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black,
-                    ),
-                  ),
-                ),
-                Container(
-                  width: 50.0,
-                  height: 5.0,
-                  decoration: BoxDecoration(
-                      color: _color,
-                      borderRadius: BorderRadius.only(
-                          topLeft: Radius.circular(10.0),
-                          bottomLeft: Radius.circular(10.0))),
-                )
-              ],
+    return Padding(
+      padding: EdgeInsets.only(top: 10.0),
+      child: ClipRRect(
+        borderRadius: BorderRadius.all(Radius.circular(20.0)),
+        child: Slidable(
+          actionPane: SlidableDrawerActionPane(),
+          actionExtentRatio: 0.25,
+          child: Container(
+            width: MediaQuery.of(context).size.width,
+            height: 110.0,
+            padding: EdgeInsets.only(
+              top: 20.0,
+              left: 20.0,
             ),
-            Expanded(
-              child: Text(
-                description,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 5,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontFamily: 'WorkSans',
-                  color: Colors.grey[450],
-                ),
-              ),
+            decoration: BoxDecoration(
+              border: Border.all(color: Colors.grey[300], width: 2.0),
+              borderRadius: BorderRadius.all(Radius.circular(20.0)),
             ),
-            Row(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.stretch,
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Icon(
-                      Icons.alarm,
-                      // color: Colors.grey[350],
-                      color: _color,
-                      size: 15.0,
+                    Expanded(
+                      child: Text(
+                        title,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 3,
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          fontFamily: 'WorkSans',
+                          fontWeight: FontWeight.w600,
+                          color: Colors.black,
+                        ),
+                      ),
                     ),
-                    Text(
-                      ' $date, $time',
-                      style: TextStyle(
-                        fontSize: 13.0,
-                        fontFamily: 'WorkSans',
-                        fontWeight: FontWeight.w600,
-                        // color: Colors.grey[350],
-                        color: _color,
+                    Container(
+                      width: 50.0,
+                      height: 5.0,
+                      decoration: BoxDecoration(
+                          color: _color,
+                          borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(10.0),
+                              bottomLeft: Radius.circular(10.0))),
+                    )
+                  ],
+                ),
+                Expanded(
+                  child: Text(
+                    description,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 5,
+                    style: TextStyle(
+                      fontSize: 14.0,
+                      fontFamily: 'WorkSans',
+                      color: Colors.grey[450],
+                    ),
+                  ),
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Row(
+                      children: [
+                        Icon(
+                          Icons.alarm,
+                          // color: Colors.grey[350],
+                          color: _color,
+                          size: 15.0,
+                        ),
+                        Text(
+                          ' $date, $time',
+                          style: TextStyle(
+                            fontSize: 13.0,
+                            fontFamily: 'WorkSans',
+                            fontWeight: FontWeight.w600,
+                            // color: Colors.grey[350],
+                            color: _color,
+                          ),
+                        ),
+                      ],
+                    ),
+                    Transform.scale(
+                      scale: 0.7,
+                      child: CircularCheckBox(
+                        value: isChecked,
+                        activeColor: Colors.grey[350],
+                        checkColor: Colors.black,
+                        inactiveColor: Colors.grey,
+                        materialTapTargetSize: MaterialTapTargetSize.padded,
+                        onChanged: checkBoxCallBack,
                       ),
                     ),
                   ],
                 ),
-                Transform.scale(
-                  scale: 0.7,
-                  child: CircularCheckBox(
-                    value: isChecked,
-                    activeColor: Colors.grey[350],
-                    checkColor: Colors.black,
-                    inactiveColor: Colors.grey,
-                    materialTapTargetSize: MaterialTapTargetSize.padded,
-                    onChanged: checkBoxCallBack,
-                  ),
-                ),
               ],
+            ),
+          ),
+          secondaryActions: [
+            IconSlideAction(
+              color: _color,
+              icon: Icons.check,
+              onTap: () {
+                return print('Delete');
+              },
             ),
           ],
         ),
       ),
-      secondaryActions: [
-        IconSlideAction(
-          color: _color,
-          icon: Icons.check,
-          onTap: () {
-            return print('Delete');
-          },
-        ),
-      ],
     );
   }
 }
