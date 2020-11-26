@@ -1,6 +1,8 @@
 import 'package:checklst/models/reminder.dart';
+import 'package:checklst/models/reminder_db.dart';
 import 'package:checklst/widgets/reminder_tile.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class TodaysPrioritiesBody extends StatefulWidget {
   @override
@@ -15,34 +17,6 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
     setState(() {});
   }
 
-  List<Reminder> reminderList = [
-    Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
-        date: 'Today',
-        time: '17:00 pm'),
-    Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
-        date: 'Today',
-        time: '17:00 pm'),
-    Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
-        date: 'Today',
-        time: '17:00 pm'),
-    Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
-        date: 'Today',
-        time: '17:00 pm'),
-    Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
-        date: 'Today',
-        time: '17:00 pm'),
-  ];
-
   @override
   Widget build(BuildContext context) {
     return RefreshIndicator(
@@ -51,25 +25,29 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
       child: Container(
         height: 550.0,
         margin: EdgeInsets.only(right: 20.0),
-        child: GridView.count(
-          crossAxisCount: 2,
-          scrollDirection: Axis.vertical,
-          physics: const BouncingScrollPhysics(
-              parent: AlwaysScrollableScrollPhysics()),
-          shrinkWrap: true,
-          children: List.generate(reminderList.length, (index) {
-            return ReminderTile(
-                title: reminderList[index].title,
-                description: reminderList[index].description,
-                date: reminderList[index].date,
-                time: reminderList[index].time,
-                isChecked: reminderList[index].isDone,
-                checkBoxCallBack: (checkBoxState) {
-                  setState(() {
-                    reminderList[index].toggleDone();
-                  });
-                });
-          }),
+        child: Consumer<ReminderDB>(
+          builder: (context, reminderDB, child) {
+            return GridView.count(
+              crossAxisCount: 2,
+              scrollDirection: Axis.vertical,
+              physics: const BouncingScrollPhysics(
+                  parent: AlwaysScrollableScrollPhysics()),
+              shrinkWrap: true,
+              children: List.generate(reminderDB.reminderList.length, (index) {
+                return ReminderTile(
+                    title: reminderDB.reminderList[index].title,
+                    description: reminderDB.reminderList[index].description,
+                    date: reminderDB.reminderList[index].date,
+                    time: reminderDB.reminderList[index].time,
+                    isChecked: reminderDB.reminderList[index].isDone,
+                    checkBoxCallBack: (checkBoxState) {
+                      setState(() {
+                        reminderDB.reminderList[index].toggleDone();
+                      });
+                    });
+              }),
+            );
+          },
         ),
       ),
     );

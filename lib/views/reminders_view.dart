@@ -1,6 +1,5 @@
 import 'package:checklst/utilities/constants.dart';
 import 'package:checklst/views/body_widgets/todays_priorities_body.dart';
-import 'package:checklst/views/body_widgets/upcoming_body.dart';
 import 'package:flutter/material.dart';
 import 'body_widgets/no_reminders_body.dart';
 

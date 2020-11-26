@@ -1,14 +1,17 @@
+import 'package:checklst/models/reminder.dart';
+import 'package:checklst/models/reminder_db.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'reminder_sheet_textfield.dart';
 
 class BottomReminderSheet extends StatefulWidget {
-  final Function reminderTitleCallBack;
-
-  BottomReminderSheet(
-      {@required
-          this.reminderTitleCallBack}); //TODO 2: Once the constructor is initialised, the function passed just comes and sits in the class memory.
+  // final Function reminderTitleCallBack;
+  //
+  // BottomReminderSheet(
+  //     {@required
+  //         this.reminderTitleCallBack});
 
   @override
   _BottomReminderSheetState createState() => _BottomReminderSheetState();
@@ -17,6 +20,9 @@ class BottomReminderSheet extends StatefulWidget {
 class _BottomReminderSheetState extends State<BottomReminderSheet> {
   final titleTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
+
+  String date;
+  String time;
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +69,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   icon: Icon(Icons.event),
                   dateLabelText: 'Date',
                   onChanged: (val) {
-                    //date
+                    date = val;
                   },
                   validator: (val) {
                     return null;
@@ -77,7 +83,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   timeLabelText: "Time",
                   use24HourFormat: false,
                   onChanged: (val) {
-                    //time
+                    time = val;
                   },
                   validator: (val) {
                     return null;
@@ -99,10 +105,15 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   padding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   onPressed: () {
-                    widget
-                        .reminderTitleCallBack(descriptionTextController.text);
+                    Provider.of<ReminderDB>(context, listen: false).addReminder(
+                        titleTextController,
+                        descriptionTextController,
+                        date,
+                        time);
+
                     titleTextController.clear();
                     titleTextController.clear();
+                    Navigator.pop(context);
                   },
                   child: Text(
                     'Add',
