@@ -1,31 +1,21 @@
-import 'package:checklst/utilities/location.dart';
 import 'package:checklst/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 
-class AuthView extends StatefulWidget {
+class AuthBody extends StatefulWidget {
   @override
-  _AuthViewState createState() => _AuthViewState();
+  _AuthBodyState createState() => _AuthBodyState();
 }
 
-class _AuthViewState extends State<AuthView> {
-  String _requestedBody = 'loggedin';
-
-  // String _requestedBody = 'login';
+class _AuthBodyState extends State<AuthBody> {
+  String _requestedBody = 'login';
 
   final _formKey = GlobalKey<FormState>();
   final _nameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   bool _showSpinner = false;
-
-  LocationService locationService = LocationService();
-  var userLocation;
-  void getLocationData() async {
-//  Fetching _userLocation
-    userLocation = await locationService.getLocation();
-  }
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
@@ -85,12 +75,6 @@ class _AuthViewState extends State<AuthView> {
         print(e);
       }
     }
-  }
-
-  void initState() {
-    super.initState();
-
-    getLocationData();
   }
 
   @override

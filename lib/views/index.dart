@@ -13,6 +13,7 @@ class _IndexViewState extends State<IndexView> {
   bool _searchPressed = false;
 
   int _index = 0;
+  // int _index = 1;
   List<Widget> _widgetList = [
     RemindersView(),
     AccountView(),

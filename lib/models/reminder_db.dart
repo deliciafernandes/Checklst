@@ -10,11 +10,6 @@ class ReminderDB extends ChangeNotifier {
         description: 'Reminder description',
         date: 'Today',
         time: '17:00 pm'),
-    Reminder(
-        title: 'Dels First Reminder',
-        description: 'just keep going',
-        date: 'Today',
-        time: '17:00 pm'),
   ];
 
   UnmodifiableListView<Reminder> get reminderList {
@@ -30,7 +25,8 @@ class ReminderDB extends ChangeNotifier {
     final reminder = Reminder(
       title: title,
       description: description,
-      date: 'Today',
+      // date: 'Today',
+      date: date,
       time: time,
     );
 

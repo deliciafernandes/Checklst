@@ -64,11 +64,11 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   dateLabelText: 'Date',
                   onChanged: (val) {
                     date = val;
+                    print(date);
                   },
                   validator: (val) {
                     return null;
                   },
-                  onSaved: (val) {},
                 ),
                 DateTimePicker(
                   type: DateTimePickerType.time,
