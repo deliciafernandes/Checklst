@@ -6,17 +6,31 @@ import 'package:checklst/utilities/colors.dart';
 
 class ReminderTile extends StatelessWidget {
   final _random = new Random();
+  final String title;
+  final String description;
+  final String date;
+  final String time;
+  final bool isChecked;
+  final Function checkBoxCallBack;
+
+  ReminderTile(
+      {@required this.title,
+      @required this.description,
+      @required this.date,
+      @required this.time,
+      this.isChecked,
+      this.checkBoxCallBack});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 70.0,
-      height: 50.0,
-      margin: EdgeInsets.only(top: 25.0, left: 25.0),
+      width: 80.0,
+      height: 30.0,
+      margin: EdgeInsets.only(top: 20.0, left: 20.0),
       padding: EdgeInsets.only(
         top: 20.0,
         left: 20.0,
-        bottom: 20.0,
+        bottom: 15.0,
       ),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300], width: 2.0),
@@ -32,7 +46,7 @@ class ReminderTile extends StatelessWidget {
             children: [
               Expanded(
                 child: Text(
-                  'Reminder Title',
+                  title,
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
                   style: TextStyle(
@@ -59,7 +73,7 @@ class ReminderTile extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(right: 20.0),
               child: Text(
-                'Reminder Description dummy data',
+                description,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 5,
                 style: TextStyle(
@@ -70,40 +84,29 @@ class ReminderTile extends StatelessWidget {
               ),
             ),
           ),
-          Padding(
-            padding: EdgeInsets.only(right: 20.0),
-            child: Row(
-              children: [
-                Icon(
-                  Icons.schedule,
-                  size: 18.0,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                '$date, $time',
+                style: TextStyle(
+                  fontSize: 13.0,
+                  fontFamily: 'WorkSans',
+                  fontWeight: FontWeight.w600,
                   color: Colors.grey[350],
                 ),
-                Text(
-                  ' Time',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontFamily: 'WorkSans',
-                    fontWeight: FontWeight.w600,
-                    color: Colors.grey[350],
-                  ),
+              ),
+              Transform.scale(
+                scale: 0.7,
+                child: Checkbox(
+                  activeColor: Colors.white,
+                  // hoverColor: colorsList[_random.nextInt(colorsList.length)],
+                  checkColor: Colors.black,
+                  value: isChecked,
+                  onChanged: checkBoxCallBack,
                 ),
-                // Icon(
-                //   Icons.location_on_outlined,
-                //   size: 18.0,
-                //   color: Colors.grey[350],
-                // ),
-                // Text(
-                //   'Location',
-                //   style: TextStyle(
-                //     fontSize: 15.0,
-                //     fontFamily: 'WorkSans',
-                //     fontWeight: FontWeight.w600,
-                //     color: Colors.grey[350],
-                //   ),
-                // ),
-              ],
-            ),
+              )
+            ],
           ),
         ],
       ),

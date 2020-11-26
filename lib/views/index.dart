@@ -24,6 +24,7 @@ class _IndexViewState extends State<IndexView> {
     // var _height = MediaQuery.of(context).size.height;
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         elevation: 0.0,
         backgroundColor: Color(0xfffafafa),
@@ -111,8 +112,9 @@ class _IndexViewState extends State<IndexView> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) =>
-                BottomReminderSheet(taskTitleCallBack: (newTaskText) {}),
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => BottomReminderSheet(),
           );
         },
         highlightElevation: 3.0,

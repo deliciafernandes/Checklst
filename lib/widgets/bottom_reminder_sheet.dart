@@ -1,25 +1,27 @@
+import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
 
+import 'reminder_sheet_textfield.dart';
+
 class BottomReminderSheet extends StatefulWidget {
-  final Function taskTitleCallBack;
+  final Function reminderTitleCallBack;
 
   BottomReminderSheet(
       {@required
-          this.taskTitleCallBack}); //TODO 2: Once the constructor is initialised, the function passed just comes and sits in the class memory.
+          this.reminderTitleCallBack}); //TODO 2: Once the constructor is initialised, the function passed just comes and sits in the class memory.
 
   @override
   _BottomReminderSheetState createState() => _BottomReminderSheetState();
 }
 
 class _BottomReminderSheetState extends State<BottomReminderSheet> {
-  final taskTextController = TextEditingController();
+  final titleTextController = TextEditingController();
+  final descriptionTextController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    String taskText;
-
-    return Container(
-      color: Colors.transparent,
+    return SizedBox(
+      height: 550.0,
       child: Container(
         padding: EdgeInsets.all(30.0),
         decoration: BoxDecoration(
@@ -31,7 +33,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
         ),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             Text(
               'Add Reminder',
@@ -45,12 +47,43 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
             Column(
               children: [
                 ReminderSheetTextField(
-                    taskTextController: taskTextController,
+                    taskTextController: titleTextController,
                     hintText: 'Reminder Title'),
                 SizedBox(height: 10.0),
                 ReminderSheetTextField(
-                    taskTextController: taskTextController,
+                    taskTextController: descriptionTextController,
                     hintText: 'Reminder Description'),
+                SizedBox(height: 10.0),
+                DateTimePicker(
+                  type: DateTimePickerType.date,
+                  dateMask: 'yyyy/MM/dd',
+                  //initialValue: _initialValue,
+                  firstDate: DateTime(2000),
+                  lastDate: DateTime(2100),
+                  icon: Icon(Icons.event),
+                  dateLabelText: 'Date',
+                  onChanged: (val) {
+                    //date
+                  },
+                  validator: (val) {
+                    return null;
+                  },
+                  onSaved: (val) {},
+                ),
+                DateTimePicker(
+                  type: DateTimePickerType.time,
+                  //initialValue: _initialValue,
+                  icon: Icon(Icons.access_time),
+                  timeLabelText: "Time",
+                  use24HourFormat: false,
+                  onChanged: (val) {
+                    //time
+                  },
+                  validator: (val) {
+                    return null;
+                  },
+                  onSaved: (val) {},
+                )
               ],
             ),
             ButtonBar(
@@ -58,6 +91,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
               buttonMinWidth: 150.0,
               children: <Widget>[
                 RaisedButton(
+                  elevation: 8.0,
                   color: Colors.black,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
@@ -65,9 +99,10 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   padding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   onPressed: () {
-                    widget.taskTitleCallBack(
-                        taskText); //TODO 3: Here the function taskTitleCallBack is called and taskText is passed, Now it is performed!
-                    taskTextController.clear();
+                    widget
+                        .reminderTitleCallBack(descriptionTextController.text);
+                    titleTextController.clear();
+                    titleTextController.clear();
                   },
                   child: Text(
                     'Add',
@@ -80,7 +115,8 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   ),
                 ),
                 RaisedButton(
-                  color: Colors.black,
+                  color: Colors.grey[300],
+                  elevation: 8.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),
                   ),
@@ -90,7 +126,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                     Navigator.pop(context);
                   },
                   child: Text(
-                    'Done',
+                    'Cancel',
                     style: TextStyle(
                       fontSize: 22.0,
                       fontFamily: 'WorkSans',
@@ -104,44 +140,6 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
           ],
         ),
       ),
-    );
-  }
-}
-
-class ReminderSheetTextField extends StatelessWidget {
-  final TextEditingController taskTextController;
-  String taskText;
-  final String hintText;
-
-  ReminderSheetTextField(
-      {this.taskTextController, this.taskText, this.hintText});
-
-  @override
-  Widget build(BuildContext context) {
-    return TextField(
-      controller: taskTextController,
-      autocorrect: true,
-      // autofocus:
-      //     true, //To automatically enable the textfield and show keyboard
-      decoration: InputDecoration(
-        hintText: hintText,
-        fillColor: Colors.white,
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-          borderSide: BorderSide(
-            color: Colors.grey[400],
-          ),
-        ),
-        enabledBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(25.0),
-          borderSide: BorderSide(
-            color: Colors.grey[400],
-          ),
-        ),
-      ),
-      onChanged: (value) {
-        taskText = value;
-      },
     );
   }
 }
