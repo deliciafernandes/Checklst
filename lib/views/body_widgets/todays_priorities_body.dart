@@ -24,28 +24,31 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
       onRefresh: _rebuild,
       child: Container(
         height: 550.0,
-        margin: EdgeInsets.only(right: 20.0),
         child: Consumer<ReminderDB>(
           builder: (context, reminderDB, child) {
-            return GridView.count(
-              crossAxisCount: 2,
+            return ListView.builder(
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
+              padding: EdgeInsets.symmetric(vertical: 10.0),
               shrinkWrap: true,
-              children: List.generate(reminderDB.reminderList.length, (index) {
+              itemBuilder: (context, index) {
                 return ReminderTile(
-                    title: reminderDB.reminderList[index].title,
-                    description: reminderDB.reminderList[index].description,
-                    date: reminderDB.reminderList[index].date,
-                    time: reminderDB.reminderList[index].time,
-                    isChecked: reminderDB.reminderList[index].isDone,
-                    checkBoxCallBack: (checkBoxState) {
-                      setState(() {
+                  title: reminderDB.reminderList[index].title,
+                  description: reminderDB.reminderList[index].description,
+                  date: reminderDB.reminderList[index].date,
+                  time: reminderDB.reminderList[index].time,
+                  isChecked: reminderDB.reminderList[index].isDone,
+                  checkBoxCallBack: (checkBoxState) {
+                    setState(
+                      () {
                         reminderDB.reminderList[index].toggleDone();
-                      });
-                    });
-              }),
+                      },
+                    );
+                  },
+                );
+              },
+              itemCount: reminderDB.reminderList.length,
             );
           },
         ),

@@ -7,12 +7,6 @@ import 'package:provider/provider.dart';
 import 'reminder_sheet_textfield.dart';
 
 class BottomReminderSheet extends StatefulWidget {
-  // final Function reminderTitleCallBack;
-  //
-  // BottomReminderSheet(
-  //     {@required
-  //         this.reminderTitleCallBack});
-
   @override
   _BottomReminderSheetState createState() => _BottomReminderSheetState();
 }
@@ -105,9 +99,9 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   padding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   onPressed: () {
-                    Provider.of<ReminderDB>(context, listen: false).addReminder(
-                        titleTextController,
-                        descriptionTextController,
+                    Provider.of<ReminderDB>(context).addReminder(
+                        titleTextController.text,
+                        descriptionTextController.text,
                         date,
                         time);
 

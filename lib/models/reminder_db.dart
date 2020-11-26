@@ -1,8 +1,15 @@
+import 'dart:collection';
+
 import 'package:flutter/material.dart';
 import 'reminder.dart';
 
 class ReminderDB extends ChangeNotifier {
-  List<Reminder> reminderList = [
+  List<Reminder> _reminderList = [
+    Reminder(
+        title: 'Reminder Title',
+        description: 'Reminder description',
+        date: 'Today',
+        time: '17:00 pm'),
     Reminder(
         title: 'Reminder Title',
         description: 'Reminder description',
@@ -10,18 +17,24 @@ class ReminderDB extends ChangeNotifier {
         time: '17:00 pm'),
   ];
 
-  void addReminder(
-      TextEditingController titleTextController,
-      TextEditingController descriptionTextController,
-      String date,
-      String time) {
-    final reminder = Reminder(
-        title: titleTextController.text,
-        description: descriptionTextController.text,
-        date: 'Today',
-        time: time);
+  UnmodifiableListView<Reminder> get reminderList {
+    return UnmodifiableListView(_reminderList);
+  }
 
-    reminderList.add(reminder);
+  void addReminder(
+    String title,
+    String description,
+    String date,
+    String time,
+  ) {
+    final reminder = Reminder(
+      title: title,
+      description: description,
+      date: 'Today',
+      time: time,
+    );
+
+    _reminderList.add(reminder);
     notifyListeners();
   }
 }

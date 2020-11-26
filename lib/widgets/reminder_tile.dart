@@ -24,13 +24,12 @@ class ReminderTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: 80.0,
-      height: 30.0,
-      margin: EdgeInsets.only(top: 20.0, left: 20.0),
+      width: MediaQuery.of(context).size.width,
+      height: 100.0,
+      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
       padding: EdgeInsets.only(
-        top: 20.0,
+        top: 15.0,
         left: 20.0,
-        bottom: 15.0,
       ),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey[300], width: 2.0),
@@ -58,7 +57,7 @@ class ReminderTile extends StatelessWidget {
                 ),
               ),
               Container(
-                width: 28.0,
+                width: 50.0,
                 height: 5.0,
                 decoration: BoxDecoration(
                     color: colorsList[_random.nextInt(colorsList.length)],
@@ -68,7 +67,6 @@ class ReminderTile extends StatelessWidget {
               )
             ],
           ),
-          SizedBox(height: 10.0),
           Expanded(
             child: Padding(
               padding: EdgeInsets.only(right: 20.0),
