@@ -1,5 +1,4 @@
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-
+import 'package:checklst/widgets/bottom_reminder_sheet.dart';
 import 'package:checklst/widgets/fab_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'account_view.dart';
@@ -112,15 +111,14 @@ class _IndexViewState extends State<IndexView> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        // onPressed: () {
-        //   showModalBottomSheet(
-        //     context: context,
-        //     isScrollControlled: true,
-        //     backgroundColor: Colors.transparent,
-        //     builder: (context) => BottomReminderSheet(),
-        //   );
-        // },
-        onPressed: showNotification,
+        onPressed: () {
+          showModalBottomSheet(
+            context: context,
+            isScrollControlled: true,
+            backgroundColor: Colors.transparent,
+            builder: (context) => BottomReminderSheet(),
+          );
+        },
         highlightElevation: 3.0,
         child: Icon(
           Icons.add,
@@ -133,99 +131,4 @@ class _IndexViewState extends State<IndexView> {
           true, // ensures that that scaffold's body will be visible through the bottom navigation bar's notch
     );
   }
-
-  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-      FlutterLocalNotificationsPlugin();
-
-  @override
-  void initState() {
-    super.initState();
-    var initializationSettingsAndroid =
-        AndroidInitializationSettings('playstore');
-    var initSetttings =
-        InitializationSettings(android: initializationSettingsAndroid);
-
-    flutterLocalNotificationsPlugin.initialize(initSetttings,
-        onSelectNotification: onSelectNotification);
-  }
-
-  // ignore: missing_return
-  Future onSelectNotification(String payload) {
-    Navigator.of(context).push(MaterialPageRoute(builder: (_) {
-      return IndexView();
-    }));
-  }
-
-  showNotification() async {
-    var android = new AndroidNotificationDetails(
-        'id', 'channel ', 'description',
-        priority: Priority.high, importance: Importance.max);
-    var iOS = new IOSNotificationDetails();
-    var platform = new NotificationDetails(android: android);
-    await flutterLocalNotificationsPlugin.show(
-        0, 'Flutter devs', 'Flutter Local Notification Demo', platform,
-        payload: 'Welcome to the Local Notification demo ');
-  }
-
-//   showNotification() async {
-//     var android = new AndroidNotificationDetails(
-//         'id', 'channel ', 'description',
-//         priority: Priority.High, importance: Importance.Max);
-//     var iOS = new IOSNotificationDetails();
-//     var platform = new NotificationDetails(android, iOS);
-//     await flutterLocalNotificationsPlugin.show(
-//         0, 'Flutter devs', 'Flutter Local Notification Demo', platform,
-//         payload: 'Welcome to the Local Notification demo ');
-//   }
 }
-
-// FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-//     FlutterLocalNotificationsPlugin();
-//
-// void initState() {
-//   super.initState();
-//   var initializationSettingsAndroid =
-//       AndroidInitializationSettings('playstore');
-//   // var initializationSettingsIOs = IOSInitializationSettings();
-//   // var initSetttings = InitializationSettings(
-//   //     android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
-//
-//   var initSetttings =
-//       InitializationSettings(android: initializationSettingsAndroid);
-//
-//   flutterLocalNotificationsPlugin.initialize(initSetttings,
-//       onSelectNotification: onSelectNotification);
-// }
-//
-// // ignore: missing_return
-// Future onSelectNotification() {
-//   Navigator.of(context).push(
-//     MaterialPageRoute(
-//       builder: (_) {
-//         return IndexView();
-//       },
-//     ),
-//   );
-// }
-//
-// Future<void> scheduleNotification() async {
-//   var scheduledNotificationDateTime =
-//       DateTime.now().add(Duration(seconds: 5));
-//   var androidPlatformChannelSpecifics = AndroidNotificationDetails(
-//     'channel id',
-//     'channel name',
-//     'channel description',
-//     icon: 'playstore',
-//     largeIcon: DrawableResourceAndroidBitmap('playstore'),
-//   );
-//   // var iOSPlatformChannelSpecifics = IOSNotificationDetails();
-//   // var platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics, iOS: IOSNotificationDetails);
-//   var platformChannelSpecifics =
-//       NotificationDetails(android: androidPlatformChannelSpecifics);
-//   await flutterLocalNotificationsPlugin.zonedSchedule(
-//       0,
-//       'scheduled title',
-//       'scheduled body',
-//       scheduledNotificationDateTime,
-//       platformChannelSpecifics);
-// }

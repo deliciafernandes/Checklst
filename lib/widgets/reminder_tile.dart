@@ -68,6 +68,13 @@ class _ReminderTileState extends State<ReminderTile> {
             child: Slidable(
               actionPane: SlidableDrawerActionPane(),
               actionExtentRatio: 0.25,
+              secondaryActions: [
+                IconSlideAction(
+                  color: _color,
+                  icon: Icons.check,
+                  onTap: widget.deleteCallBack,
+                ),
+              ],
               child: Container(
                 width: MediaQuery.of(context).size.width,
                 height: 110.0,
@@ -166,13 +173,6 @@ class _ReminderTileState extends State<ReminderTile> {
                   ],
                 ),
               ),
-              secondaryActions: [
-                IconSlideAction(
-                  color: _color,
-                  icon: Icons.check,
-                  onTap: widget.deleteCallBack,
-                ),
-              ],
             ),
           ),
         ],

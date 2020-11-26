@@ -1,6 +1,7 @@
 import 'package:checklst/models/reminder_db.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'reminder_sheet_textfield.dart';
@@ -23,6 +24,58 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
 
     var newFormat = DateFormat("d MMM y");
     date = newFormat.format(parsedDate);
+  }
+
+  FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+      FlutterLocalNotificationsPlugin();
+
+  void initState() {
+    super.initState();
+    var initializationSettingsAndroid =
+        AndroidInitializationSettings('playstore');
+    // var initializationSettingsIOs = IOSInitializationSettings();
+    // var initSetttings = InitializationSettings(
+    //     android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
+
+    var initSetttings =
+        InitializationSettings(android: initializationSettingsAndroid);
+
+    flutterLocalNotificationsPlugin.initialize(initSetttings,
+        onSelectNotification: onSelectNotification);
+  }
+
+// ignore: missing_return
+  Future onSelectNotification(String payload) {
+    // Navigator.of(context).push(
+    //   MaterialPageRoute(
+    //     builder: (_) {
+    //       return IndexView();
+    //     },
+    //   ),
+    // );
+  }
+
+  Future<void> scheduleNotification() async {
+    // days: on hold TODO
+    var scheduledNotificationDateTime =
+        DateTime.now().add(Duration(hours: 2, minutes: 3, seconds: 1));
+    var androidPlatformChannelSpecifics = AndroidNotificationDetails(
+      'channel id',
+      'channel name',
+      'channel description',
+      icon: 'playstore',
+      largeIcon: DrawableResourceAndroidBitmap('playstore'),
+    );
+    // var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    // var platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics, iOS: IOSNotificationDetails);
+    var platformChannelSpecifics =
+        NotificationDetails(android: androidPlatformChannelSpecifics);
+    await flutterLocalNotificationsPlugin.schedule(
+        0,
+        titleTextController.text,
+        descriptionTextController.text,
+        scheduledNotificationDateTime,
+        platformChannelSpecifics);
   }
 
   @override
@@ -84,6 +137,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   use24HourFormat: false,
                   onChanged: (val) {
                     time = val;
+                    print(time);
                   },
                   validator: (val) {
                     return null;
