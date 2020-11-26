@@ -17,6 +17,8 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
 
   String date;
   String time;
+  int hours;
+  int minutes;
 
   void formatDate() {
     DateTime parsedDate = DateTime.parse(date);
@@ -26,6 +28,20 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
     date = newFormat.format(parsedDate);
   }
 
+  //TODO: implement better logic
+  void getDuration() {
+    //splitting of time
+    List reminderTime = time.split(':');
+
+    DateTime now = DateTime.now();
+    List currentTime = DateFormat('kk:mm').format(now).split(':');
+
+    hours = int.parse(reminderTime[0]) - int.parse(currentTime[0]);
+    minutes = int.parse(reminderTime[1]) - int.parse(currentTime[1]) - 1;
+
+    print('$hours $minutes');
+  }
+
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
@@ -33,6 +49,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
     super.initState();
     var initializationSettingsAndroid =
         AndroidInitializationSettings('playstore');
+    // '@mipmap/launcher_icon'
     // var initializationSettingsIOs = IOSInitializationSettings();
     // var initSetttings = InitializationSettings(
     //     android: initializationSettingsAndroid, iOS: initializationSettingsIOs);
@@ -57,8 +74,10 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
 
   Future<void> scheduleNotification() async {
     // days: on hold TODO
+    getDuration();
+
     var scheduledNotificationDateTime =
-        DateTime.now().add(Duration(hours: 2, minutes: 3, seconds: 1));
+        DateTime.now().add(Duration(hours: hours, minutes: minutes));
     var androidPlatformChannelSpecifics = AndroidNotificationDetails(
       'channel id',
       'channel name',
@@ -131,13 +150,11 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 ),
                 DateTimePicker(
                   type: DateTimePickerType.time,
-                  // initialValue: '22:34',
                   icon: Icon(Icons.access_time),
                   timeLabelText: "Time",
-                  use24HourFormat: false,
+                  use24HourFormat: true,
                   onChanged: (val) {
                     time = val;
-                    print(time);
                   },
                   validator: (val) {
                     return null;
@@ -159,8 +176,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   padding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   onPressed: () {
-                    formatDate();
-
+                    scheduleNotification();
                     Provider.of<ReminderDB>(context, listen: false).addReminder(
                         titleTextController.text,
                         descriptionTextController.text,
