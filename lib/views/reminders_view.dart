@@ -62,15 +62,12 @@ class _RemindersViewState extends State<RemindersView> {
                 ),
               ),
               SizedBox(height: 3.0),
-              FittedBox(
-                fit: BoxFit.fitWidth,
-                child: Text(
-                  'You have ${Provider.of<ReminderDB>(context).reminderList.length} important tasks to do for today.',
-                  style: TextStyle(
-                    fontSize: 16.0,
-                    fontFamily: 'WorkSans',
-                    color: Colors.grey[500],
-                  ),
+              Text(
+                'You have ${Provider.of<ReminderDB>(context).reminderList.length} reminders for today.',
+                style: TextStyle(
+                  fontSize: 20.0,
+                  fontFamily: 'WorkSans',
+                  color: Colors.grey[500],
                 ),
               ),
               SizedBox(height: 25.0),
