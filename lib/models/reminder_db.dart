@@ -18,7 +18,7 @@ class ReminderDB extends ChangeNotifier {
     final reminder = Reminder(
         title: titleTextController.text,
         description: descriptionTextController.text,
-        date: date,
+        date: 'Today',
         time: time);
 
     reminderList.add(reminder);
