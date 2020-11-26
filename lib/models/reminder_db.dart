@@ -37,4 +37,14 @@ class ReminderDB extends ChangeNotifier {
     _reminderList.add(reminder);
     notifyListeners();
   }
+
+  void updateReminder(Reminder reminder) {
+    reminder.toggleDone();
+    notifyListeners();
+  }
+
+  void deleteReminder(Reminder reminder) {
+    _reminderList.remove(reminder);
+    notifyListeners();
+  }
 }

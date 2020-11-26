@@ -1,5 +1,6 @@
 import 'package:checklst/models/reminder_db.dart';
 import 'package:checklst/widgets/reminder_tile.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,18 +33,18 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
               padding: EdgeInsets.symmetric(vertical: 10.0),
               shrinkWrap: true,
               itemBuilder: (context, index) {
+                final simple = reminderDB.reminderList[index];
                 return ReminderTile(
-                  title: reminderDB.reminderList[index].title,
-                  description: reminderDB.reminderList[index].description,
-                  date: reminderDB.reminderList[index].date,
-                  time: reminderDB.reminderList[index].time,
-                  isChecked: reminderDB.reminderList[index].isDone,
+                  title: simple.title,
+                  description: simple.description,
+                  date: simple.date,
+                  time: simple.time,
+                  isChecked: simple.isDone,
                   checkBoxCallBack: (checkBoxState) {
-                    setState(
-                      () {
-                        reminderDB.reminderList[index].toggleDone();
-                      },
-                    );
+                    reminderDB.updateReminder(simple);
+                  },
+                  deleteCallBack: () {
+                    reminderDB.deleteReminder(simple);
                   },
                 );
               },
