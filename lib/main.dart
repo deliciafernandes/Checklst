@@ -1,5 +1,7 @@
+import 'package:checklst/models/reminder_db.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'utilities/app_theme.dart';
 import 'utilities/router.dart' as router;
 import 'utilities/routing_constants.dart';
@@ -19,15 +21,20 @@ class Checklst extends StatefulWidget {
 class _ChecklstState extends State<Checklst> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: AppTheme.lightTheme,
+    return ChangeNotifierProvider<ReminderDB>(
+      create: (_) {
+        return ReminderDB();
+      },
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: AppTheme.lightTheme,
 
-      // Pass the generateRoute function to onGenerateRoute
-      // To define the home view as the starting view, instead of setting the home property to a widget we’ll use initialRoute instead.
-      // initialRoute: ... vs home: ...
-      onGenerateRoute: router.generateRoute,
-      initialRoute: kIndexView,
+        // Pass the generateRoute function to onGenerateRoute
+        // To define the home view as the starting view, instead of setting the home property to a widget we’ll use initialRoute instead.
+        // initialRoute: ... vs home: ...
+        onGenerateRoute: router.generateRoute,
+        initialRoute: kIndexView,
+      ),
     );
   }
 }

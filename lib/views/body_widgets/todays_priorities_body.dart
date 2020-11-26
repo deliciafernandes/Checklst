@@ -1,4 +1,3 @@
-import 'package:checklst/models/reminder.dart';
 import 'package:checklst/models/reminder_db.dart';
 import 'package:checklst/widgets/reminder_tile.dart';
 import 'package:flutter/material.dart';

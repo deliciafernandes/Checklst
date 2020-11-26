@@ -1,3 +1,4 @@
+import 'package:circular_check_box/circular_check_box.dart';
 import 'package:flutter/material.dart';
 import 'dart:math';
 import 'dart:ui';
@@ -23,12 +24,14 @@ class ReminderTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Color _color = colorsList[_random.nextInt(colorsList.length)];
+
     return Container(
       width: MediaQuery.of(context).size.width,
-      height: 100.0,
-      margin: EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
+      height: 110.0,
+      margin: EdgeInsets.only(top: 10.0),
       padding: EdgeInsets.only(
-        top: 15.0,
+        top: 20.0,
         left: 20.0,
       ),
       decoration: BoxDecoration(
@@ -60,7 +63,7 @@ class ReminderTile extends StatelessWidget {
                 width: 50.0,
                 height: 5.0,
                 decoration: BoxDecoration(
-                    color: colorsList[_random.nextInt(colorsList.length)],
+                    color: _color,
                     borderRadius: BorderRadius.only(
                         topLeft: Radius.circular(10.0),
                         bottomLeft: Radius.circular(10.0))),
@@ -68,42 +71,51 @@ class ReminderTile extends StatelessWidget {
             ],
           ),
           Expanded(
-            child: Padding(
-              padding: EdgeInsets.only(right: 20.0),
-              child: Text(
-                description,
-                overflow: TextOverflow.ellipsis,
-                maxLines: 5,
-                style: TextStyle(
-                  fontSize: 14.0,
-                  fontFamily: 'WorkSans',
-                  color: Colors.grey[450],
-                ),
+            child: Text(
+              description,
+              overflow: TextOverflow.ellipsis,
+              maxLines: 5,
+              style: TextStyle(
+                fontSize: 14.0,
+                fontFamily: 'WorkSans',
+                color: Colors.grey[450],
               ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Text(
-                '$date, $time',
-                style: TextStyle(
-                  fontSize: 13.0,
-                  fontFamily: 'WorkSans',
-                  fontWeight: FontWeight.w600,
-                  color: Colors.grey[350],
-                ),
+              Row(
+                children: [
+                  Icon(
+                    Icons.alarm,
+                    // color: Colors.grey[350],
+                    color: _color,
+                    size: 15.0,
+                  ),
+                  Text(
+                    ' $date, $time',
+                    style: TextStyle(
+                      fontSize: 13.0,
+                      fontFamily: 'WorkSans',
+                      fontWeight: FontWeight.w600,
+                      // color: Colors.grey[350],
+                      color: _color,
+                    ),
+                  ),
+                ],
               ),
               Transform.scale(
                 scale: 0.7,
-                child: Checkbox(
-                  activeColor: Colors.white,
-                  // hoverColor: colorsList[_random.nextInt(colorsList.length)],
-                  checkColor: Colors.black,
+                child: CircularCheckBox(
                   value: isChecked,
+                  activeColor: Colors.grey[350],
+                  checkColor: Colors.black,
+                  inactiveColor: Colors.grey,
+                  materialTapTargetSize: MaterialTapTargetSize.padded,
                   onChanged: checkBoxCallBack,
                 ),
-              )
+              ),
             ],
           ),
         ],

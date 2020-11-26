@@ -11,8 +11,8 @@ class ReminderDB extends ChangeNotifier {
         date: 'Today',
         time: '17:00 pm'),
     Reminder(
-        title: 'Reminder Title',
-        description: 'Reminder description',
+        title: 'Dels First Reminder',
+        description: 'just keep going',
         date: 'Today',
         time: '17:00 pm'),
   ];

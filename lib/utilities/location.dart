@@ -15,7 +15,7 @@ class LocationService {
 
       print('position');
 
-      Position position1 = await Geolocator.getCurrentPosition();
+      // Position position1 = await Geolocator.getCurrentPosition();
 
       final coordinates = Coordinates(position.latitude, position.longitude);
       var addresses =
@@ -70,8 +70,9 @@ class LocationService {
 
       return position.longitude;
     } catch (e) {
-      return 78.9629;
       print(e);
+
+      return 78.9629;
     }
   }
 }

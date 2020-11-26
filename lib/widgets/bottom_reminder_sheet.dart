@@ -1,4 +1,3 @@
-import 'package:checklst/models/reminder.dart';
 import 'package:checklst/models/reminder_db.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
@@ -56,8 +55,9 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 SizedBox(height: 10.0),
                 DateTimePicker(
                   type: DateTimePickerType.date,
-                  dateMask: 'yyyy/MM/dd',
-                  //initialValue: _initialValue,
+                  // dateMask: 'dd/MM/yyyy',
+                  dateMask: 'd MMM, yyyy',
+                  // initialValue: '26 Nov,2020',
                   firstDate: DateTime(2000),
                   lastDate: DateTime(2100),
                   icon: Icon(Icons.event),
@@ -72,7 +72,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 ),
                 DateTimePicker(
                   type: DateTimePickerType.time,
-                  //initialValue: _initialValue,
+                  // initialValue: '22:34',
                   icon: Icon(Icons.access_time),
                   timeLabelText: "Time",
                   use24HourFormat: false,
@@ -99,7 +99,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   padding:
                       EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
                   onPressed: () {
-                    Provider.of<ReminderDB>(context).addReminder(
+                    Provider.of<ReminderDB>(context, listen: false).addReminder(
                         titleTextController.text,
                         descriptionTextController.text,
                         date,
