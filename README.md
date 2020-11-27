@@ -1,3 +1,1 @@
-# Checklst
-
-Location Based Reminder App.
+# Checklst : Reminder App.
