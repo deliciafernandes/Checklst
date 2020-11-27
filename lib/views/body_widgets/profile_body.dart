@@ -11,13 +11,13 @@ class ProfileBody extends StatefulWidget {
 
 class _ProfileBodyState extends State<ProfileBody> {
   String email = 'test@gmail.com';
-  String location = 'Andheri East, Mumbai';
+  String location = 'Mahalaxmi, Mumbai.';
   final FirebaseAuth auth = FirebaseAuth.instance;
   signOut() async {
     await auth.signOut();
   }
 
-  var _currentPosition;
+  Position _currentPosition;
 
   Future<void> _getCurrentPosition() async {
     // verify permissions
@@ -33,11 +33,13 @@ class _ProfileBodyState extends State<ProfileBody> {
 
     // get address
     String _currentAddress = await _getGeolocationAddress(_currentPosition);
-    print(_currentAddress);
   }
 
   Future<String> _getGeolocationAddress(Position position) async {
     // geocoding
+
+    _currentPosition = Position(latitude: 19.112801, longitude: 72.862480);
+
     var places = await placemarkFromCoordinates(
       position.latitude,
       position.longitude,
@@ -52,8 +54,8 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   @override
   void initState() {
-    _getCurrentPosition();
-    _getGeolocationAddress(_currentPosition);
+    // _getCurrentPosition();
+    _getGeolocationAddress(Position(latitude: 19.112801, longitude: 72.862480));
     super.initState();
   }
 
