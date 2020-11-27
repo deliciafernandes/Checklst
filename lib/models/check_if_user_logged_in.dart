@@ -3,6 +3,12 @@ import 'package:flutter/material.dart';
 
 class CheckIfUserLoggedIn extends ChangeNotifier {
   bool _userLoggedIn = false;
+  FirebaseUser loggedInUser;
+
+  String getCurrentUserEmail() {
+    loggedInUser = _auth.currentUser;
+    return loggedInUser.email;
+  }
 
   final _auth = FirebaseAuth.instance;
   bool getCurrentUser() {

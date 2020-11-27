@@ -1,5 +1,5 @@
-import 'package:checklst/utilities/check_if_user_logged_in.dart';
-import 'package:checklst/widgets/bottom_reminder_sheet.dart';
+import 'package:checklst/models/check_if_user_logged_in.dart';
+import 'package:checklst/widgets/bottom_reminder_modal_sheet.dart';
 import 'package:checklst/widgets/fab_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

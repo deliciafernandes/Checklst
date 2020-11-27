@@ -1,8 +1,13 @@
 import 'dart:collection';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'check_if_user_logged_in.dart';
 import 'reminder.dart';
 
 class ReminderDB extends ChangeNotifier {
+  final _firestore = Firestore.instance;
+  CheckIfUserLoggedIn checkIfUserLoggedIn = CheckIfUserLoggedIn();
+
   List<Reminder> _reminderList = [
     // Reminder(
     //     title: 'Reminder Title',
@@ -24,12 +29,28 @@ class ReminderDB extends ChangeNotifier {
     final reminder = Reminder(
       title: title,
       description: description,
-      // date: 'Today',
       date: date,
       time: time,
     );
 
     _reminderList.add(reminder);
+    _firestore.collection('reminders').add({
+      'title': title,
+      'description': description,
+      'date': date,
+      'time': time,
+    });
+
+    // if (checkIfUserLoggedIn.getCurrentUserEmail() != null) {
+    //   _reminderList.add(reminder);
+    //   _firestore.collection('reminders').add({
+    //     'title': title,
+    //     'description': description,
+    //     'date': date,
+    //     'time': time,
+    //   });
+    // }
+
     notifyListeners();
   }
 
@@ -40,6 +61,8 @@ class ReminderDB extends ChangeNotifier {
 
   void deleteReminder(Reminder reminder) {
     _reminderList.remove(reminder);
+
+    // _firestore.collection('reminders').document('wgbhYkrUEKDMnsvYTiHZ')
     notifyListeners();
   }
 }

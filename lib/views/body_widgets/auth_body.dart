@@ -1,4 +1,4 @@
-import 'package:checklst/utilities/check_if_user_logged_in.dart';
+import 'package:checklst/models/check_if_user_logged_in.dart';
 import 'package:checklst/widgets/custom_text_form_field.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
