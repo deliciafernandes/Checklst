@@ -1,8 +1,12 @@
+import 'package:checklst/models/check_if_user_logged_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter/services.dart';
+
+CheckIfUserLoggedIn checkIfUserLoggedIn = CheckIfUserLoggedIn();
+String email = checkIfUserLoggedIn.getCurrentUserEmail();
 
 class ProfileBody extends StatefulWidget {
   @override
@@ -10,9 +14,9 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  String email = 'test@gmail.com';
   String location = 'Mahalaxmi, Mumbai.';
   final FirebaseAuth auth = FirebaseAuth.instance;
+
   signOut() async {
     await auth.signOut();
   }
@@ -161,7 +165,7 @@ class _ProfileBodyState extends State<ProfileBody> {
           ),
           SizedBox(height: 20.0),
           Text(
-            'If you want to sign out of Checklst App, click Sign Out.',
+            'If you want to sign out of Checklst App,          click Sign Out.',
             style: TextStyle(
               fontSize: 16.0,
               fontFamily: 'WorkSans',
