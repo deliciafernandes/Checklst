@@ -53,7 +53,7 @@ class _RemindersViewState extends State<RemindersView> {
               FittedBox(
                 fit: BoxFit.fitWidth,
                 child: Text(
-                  'Hello Dwayne, $greeting!',
+                  'Hello, $greeting!',
                   style: TextStyle(
                     fontSize: 25.5,
                     fontWeight: FontWeight.w500,
