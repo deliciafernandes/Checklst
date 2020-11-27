@@ -199,7 +199,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   ),
                 ),
                 RaisedButton(
-                  color: Colors.grey[300],
+                  color: Colors.grey[200],
                   elevation: 8.0,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20.0),

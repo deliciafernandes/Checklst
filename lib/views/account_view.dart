@@ -12,7 +12,7 @@ class AccountView extends StatefulWidget {
 class _AccountViewState extends State<AccountView> {
   @override
   Widget build(BuildContext context) {
-    return Provider.of<CheckIfUserLoggedIn>(context).getCurrentUser()
+    return !Provider.of<CheckIfUserLoggedIn>(context).getCurrentUser()
         ? ProfileBody()
         : AuthBody();
   }

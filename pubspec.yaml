@@ -27,7 +27,8 @@ dependencies:
 
   intl: ^0.16.1
 #  geocoder: ^0.2.1
-#  geolocator: ^6.1.8
+  geolocator: ^6.1.8
+  geocoding: ^1.0.5
 
   firebase_core: ^0.5.2+1
   firebase_auth: ^0.18.3+1

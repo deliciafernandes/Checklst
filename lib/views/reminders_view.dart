@@ -109,7 +109,7 @@ class _RemindersViewState extends State<RemindersView> {
                     ),
                     (_isClicked == 'today\'s priorities'
                         ? TodaysPrioritiesBody()
-                        : UpcomingBody()),
+                        : TodaysPrioritiesBody()),
                   ],
                 )
               : NoRemindersBody(),
