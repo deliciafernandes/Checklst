@@ -1,6 +1,8 @@
+import 'package:checklst/utilities/check_if_user_logged_in.dart';
 import 'package:checklst/views/body_widgets/auth_body.dart';
 import 'package:checklst/views/body_widgets/profile_body.dart';
 import "package:flutter/material.dart";
+import 'package:provider/provider.dart';
 
 class AccountView extends StatefulWidget {
   @override
@@ -8,18 +10,12 @@ class AccountView extends StatefulWidget {
 }
 
 class _AccountViewState extends State<AccountView> {
-  bool _userLoggedIn = true;
-
-  // void checkIfUserLoggedInd() {}
-
-  @override
-  void initState() {
-    // checkIfUserLoggedInd();
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
-    return _userLoggedIn ? ProfileBody() : AuthBody();
+    return Provider.of<CheckIfUserLoggedIn>(context).getCurrentUser()
+        ? ProfileBody()
+        : AuthBody();
   }
 }
+
+// 1234567

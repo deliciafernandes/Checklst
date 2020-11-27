@@ -16,8 +16,8 @@ class NotificationManager {
     // initialise the plugin. app_icon needs to be a added as a drawable resource to the Android head project
     var initializationSettingsAndroid =
         new AndroidInitializationSettings('@drawable/logo');
-    var initializationSettingsIOS = IOSInitializationSettings(
-        onDidReceiveLocalNotification: onDidReceiveLocalNotification);
+    // var initializationSettingsIOS = IOSInitializationSettings(
+    //     onDidReceiveLocalNotification: onDidReceiveLocalNotification);
 
     var initializationSettings =
         InitializationSettings(android: initializationSettingsAndroid);
@@ -40,7 +40,7 @@ class NotificationManager {
         importance: Importance.max,
         priority: Priority.high,
         ticker: 'Medicine Reminder');
-    var iOSPlatformChannelSpecifics = IOSNotificationDetails();
+    // var iOSPlatformChannelSpecifics = IOSNotificationDetails();
     var platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
 

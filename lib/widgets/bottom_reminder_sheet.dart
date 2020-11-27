@@ -89,6 +89,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
     // var platformChannelSpecifics = NotificationDetails(android: androidPlatformChannelSpecifics, iOS: IOSNotificationDetails);
     var platformChannelSpecifics =
         NotificationDetails(android: androidPlatformChannelSpecifics);
+    // ignore: deprecated_member_use
     await flutterLocalNotificationsPlugin.schedule(
         0,
         titleTextController.text,
