@@ -5,6 +5,7 @@ import 'dart:ui';
 
 import 'package:checklst/utilities/colors.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReminderTile extends StatefulWidget {
   final String title;
@@ -47,16 +48,19 @@ class _ReminderTileState extends State<ReminderTile> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(432.0, 816.0), allowFontScaling: true);
+
     return Padding(
-      padding: EdgeInsets.only(top: 10.0),
+      padding: EdgeInsets.only(top: 10.0.h),
       child: Stack(
         children: [
           Container(
             width: MediaQuery.of(context).size.width,
-            height: 110.0,
+            height: 110.0.h,
             padding: EdgeInsets.only(
-              top: 20.0,
-              left: 20.0,
+              top: 20.0.h,
+              left: 20.0.w,
             ),
             decoration: BoxDecoration(
               color: _color,
@@ -77,15 +81,15 @@ class _ReminderTileState extends State<ReminderTile> {
               ],
               child: Container(
                 width: MediaQuery.of(context).size.width,
-                height: 110.0,
+                height: 110.0.h,
                 padding: EdgeInsets.only(
-                  top: 20.0,
-                  left: 20.0,
+                  top: 20.0.h,
+                  left: 20.0.w,
                 ),
                 decoration: BoxDecoration(
                   color: Color(0xfffafafa),
-                  border: Border.all(color: Colors.grey[200], width: 2.0),
-                  borderRadius: BorderRadius.all(Radius.circular(20.0)),
+                  border: Border.all(color: Colors.grey[200], width: 2.0.w),
+                  borderRadius: BorderRadius.all(Radius.circular(20.0.h)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -101,7 +105,7 @@ class _ReminderTileState extends State<ReminderTile> {
                             overflow: TextOverflow.ellipsis,
                             maxLines: 3,
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 16.0.ssp,
                               fontFamily: 'WorkSans',
                               fontWeight: FontWeight.w600,
                               color: Colors.black,
@@ -112,13 +116,13 @@ class _ReminderTileState extends State<ReminderTile> {
                           ),
                         ),
                         Container(
-                          width: 50.0,
-                          height: 5.0,
+                          width: 50.0.w,
+                          height: 5.0.h,
                           decoration: BoxDecoration(
                               color: _color,
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(10.0),
-                                  bottomLeft: Radius.circular(10.0))),
+                                  topLeft: Radius.circular(10.0.h),
+                                  bottomLeft: Radius.circular(10.0.h))),
                         )
                       ],
                     ),
@@ -128,7 +132,7 @@ class _ReminderTileState extends State<ReminderTile> {
                         overflow: TextOverflow.ellipsis,
                         maxLines: 5,
                         style: TextStyle(
-                          fontSize: 14.0,
+                          fontSize: 14.0.ssp,
                           fontFamily: 'WorkSans',
                           color: Colors.grey[450],
                         ),
@@ -143,12 +147,12 @@ class _ReminderTileState extends State<ReminderTile> {
                               Icons.alarm,
                               // color: Colors.grey[350],
                               color: _color,
-                              size: 15.0,
+                              size: 15.0.h,
                             ),
                             Text(
                               ' ${widget.date}, ${widget.time}',
                               style: TextStyle(
-                                fontSize: 13.0,
+                                fontSize: 13.0.ssp,
                                 fontFamily: 'WorkSans',
                                 fontWeight: FontWeight.w600,
                                 // color: Colors.grey[350],

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class FABBottomAppBarItem {
   FABBottomAppBarItem({this.iconData, this.text});
@@ -46,6 +47,8 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(432.0, 816.0), allowFontScaling: true);
     List<Widget> items = List.generate(widget.items.length, (int index) {
       return _buildTabItem(
         item: widget.items[index],
@@ -69,12 +72,12 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
   Widget _buildMiddleTabItem() {
     return Expanded(
       child: SizedBox(
-        height: widget.height,
+        height: widget.height.h,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            SizedBox(height: widget.iconSize),
+            SizedBox(height: widget.iconSize.h),
             Text(
               widget.centerItemText ?? '',
               style: TextStyle(color: widget.color),
@@ -93,7 +96,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
     Color color = _selectedIndex == index ? widget.selectedColor : widget.color;
     return Expanded(
       child: SizedBox(
-        height: widget.height,
+        height: widget.height.h,
         child: Material(
           type: MaterialType.transparency,
           child: InkWell(
@@ -102,7 +105,7 @@ class FABBottomAppBarState extends State<FABBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(item.iconData, color: color, size: widget.iconSize),
+                Icon(item.iconData, color: color, size: widget.iconSize.h),
                 Text(
                   item.text,
                   style: TextStyle(color: color),

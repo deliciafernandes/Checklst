@@ -6,6 +6,8 @@ import 'package:provider/provider.dart';
 import 'account_view.dart';
 import 'reminders_view.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class IndexView extends StatefulWidget {
   @override
   _IndexViewState createState() => _IndexViewState();
@@ -25,14 +27,17 @@ class _IndexViewState extends State<IndexView> {
   @override
   Widget build(BuildContext context) {
     var _width = MediaQuery.of(context).size.width;
-    // var _height = MediaQuery.of(context).size.height;
+    var _height = MediaQuery.of(context).size.height;
+
+    ScreenUtil.init(context,
+        designSize: Size(_width, _height), allowFontScaling: true);
 
     return ChangeNotifierProvider<CheckIfUserLoggedIn>(
       create: (context) => CheckIfUserLoggedIn(),
       child: Scaffold(
         resizeToAvoidBottomPadding: false,
         appBar: AppBar(
-          elevation: 0.0,
+          elevation: 0.0.h,
           backgroundColor: Color(0xfffafafa),
           brightness: Brightness.light,
           automaticallyImplyLeading: false,
@@ -40,7 +45,7 @@ class _IndexViewState extends State<IndexView> {
           title: Text(
             'Checklst.',
             style: TextStyle(
-              fontSize: 30.0,
+              fontSize: 30.0.ssp,
               color: Colors.black,
               fontFamily: 'Playfair',
               fontWeight: FontWeight.w900,
@@ -48,9 +53,8 @@ class _IndexViewState extends State<IndexView> {
           ),
           actions: [
             Container(
-              width: _width - 180.0,
-              //TODO : Find hardcoded width alternative
-              margin: EdgeInsets.only(right: 15.0, top: 5.0),
+              width: _width - 180.0.w,
+              margin: EdgeInsets.only(right: 15.0.w, top: 5.0.h),
               child: TextField(
                 onTap: () {
                   setState(() {
@@ -66,7 +70,7 @@ class _IndexViewState extends State<IndexView> {
                     fontStyle: FontStyle.italic,
                     fontWeight: FontWeight.w600,
                     color: Colors.grey[350],
-                    fontSize: 13.0,
+                    fontSize: 13.0.ssp,
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
@@ -82,13 +86,13 @@ class _IndexViewState extends State<IndexView> {
                   border: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.grey[500]),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(25.0),
+                      Radius.circular(25.0.h),
                     ),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(color: Colors.black),
                     borderRadius: BorderRadius.all(
-                      Radius.circular(25.0),
+                      Radius.circular(25.0.h),
                     ),
                   ),
                 ),
@@ -123,12 +127,12 @@ class _IndexViewState extends State<IndexView> {
               builder: (context) => BottomReminderSheet(),
             );
           },
-          highlightElevation: 3.0,
+          highlightElevation: 3.0.h,
           child: Icon(
             Icons.add,
             color: Colors.black,
           ),
-          elevation: 2.0,
+          elevation: 2.0.h,
           backgroundColor: Colors.white,
         ),
         extendBody:

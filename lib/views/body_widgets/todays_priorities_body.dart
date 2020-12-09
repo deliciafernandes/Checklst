@@ -1,6 +1,5 @@
 import 'package:checklst/models/reminder_db.dart';
 import 'package:checklst/widgets/reminder_tile.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -30,6 +29,7 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
               scrollDirection: Axis.vertical,
               physics: const BouncingScrollPhysics(
                   parent: AlwaysScrollableScrollPhysics()),
+              //TODO : responsive
               padding: EdgeInsets.symmetric(vertical: 10.0),
               shrinkWrap: true,
               itemBuilder: (context, index) {

@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'body_widgets/no_reminders_body.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class RemindersView extends StatefulWidget {
   @override
   _RemindersViewState createState() => _RemindersViewState();
@@ -40,10 +42,12 @@ class _RemindersViewState extends State<RemindersView> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(432.0, 816.0), allowFontScaling: true);
     checkIfRemindersExist();
 
     return Padding(
-      padding: EdgeInsets.only(left: 20.0, right: 20.0, top: 20.0),
+      padding: EdgeInsets.only(left: 20.0.w, right: 20.0.w, top: 20.0.h),
       child: Column(
         children: [
           Column(
@@ -54,22 +58,22 @@ class _RemindersViewState extends State<RemindersView> {
                 child: Text(
                   'Hello, $greeting!',
                   style: TextStyle(
-                    fontSize: 25.5,
+                    fontSize: 25.5.ssp,
                     fontWeight: FontWeight.w500,
                     fontFamily: 'WorkSans',
                   ),
                 ),
               ),
-              SizedBox(height: 3.0),
+              SizedBox(height: 3.0.h),
               Text(
                 'You have ${Provider.of<ReminderDB>(context).reminderList.length} reminders for today.',
                 style: TextStyle(
-                  fontSize: 20.0,
+                  fontSize: 20.0.ssp,
                   fontFamily: 'WorkSans',
                   color: Colors.grey[500],
                 ),
               ),
-              SizedBox(height: 25.0),
+              SizedBox(height: 25.0.h),
             ],
           ),
           (_remindersExist)
@@ -90,7 +94,7 @@ class _RemindersViewState extends State<RemindersView> {
                                 : kInactiveTextStyle,
                           ),
                         ),
-                        SizedBox(width: 22.0),
+                        SizedBox(width: 22.0.w),
                         GestureDetector(
                           onTap: () {
                             setState(() {

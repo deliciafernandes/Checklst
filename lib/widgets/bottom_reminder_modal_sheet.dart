@@ -5,6 +5,7 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:provider/provider.dart';
 
 import 'reminder_sheet_textfield.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BottomReminderSheet extends StatefulWidget {
   @override
@@ -100,15 +101,18 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(432.0, 816.0), allowFontScaling: true);
+
     return SizedBox(
-      height: 550.0,
+      height: 550.0.h,
       child: Container(
-        padding: EdgeInsets.all(30.0),
+        padding: EdgeInsets.all(30.0.h),
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30.0),
-            topRight: Radius.circular(30.0),
+            topLeft: Radius.circular(30.0.w),
+            topRight: Radius.circular(30.0.w),
           ),
         ),
         child: Column(
@@ -119,7 +123,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
               'Add Reminder',
               textAlign: TextAlign.center,
               style: TextStyle(
-                fontSize: 40.0,
+                fontSize: 40.0.ssp,
                 fontFamily: 'WorkSans',
                 color: Colors.black,
               ),
@@ -129,11 +133,11 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 ReminderSheetTextField(
                     taskTextController: titleTextController,
                     hintText: 'Reminder Title'),
-                SizedBox(height: 10.0),
+                SizedBox(height: 10.0.h),
                 ReminderSheetTextField(
                     taskTextController: descriptionTextController,
                     hintText: 'Reminder Description'),
-                SizedBox(height: 10.0),
+                SizedBox(height: 10.0.h),
                 DateTimePicker(
                   type: DateTimePickerType.date,
                   dateMask: 'd MMM, yyyy',
@@ -166,16 +170,16 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
             ),
             ButtonBar(
               alignment: MainAxisAlignment.center,
-              buttonMinWidth: 150.0,
+              buttonMinWidth: 150.0.w,
               children: <Widget>[
                 RaisedButton(
-                  elevation: 8.0,
+                  elevation: 8.0.h,
                   color: Colors.black,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(20.0.h),
                   ),
-                  padding:
-                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                  padding: EdgeInsets.only(
+                      left: 15.w, bottom: 11.h, top: 11.h, right: 15.w),
                   onPressed: () {
                     scheduleNotification();
                     Provider.of<ReminderDB>(context, listen: false).addReminder(
@@ -191,7 +195,7 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   child: Text(
                     'Add',
                     style: TextStyle(
-                      fontSize: 22.0,
+                      fontSize: 22.0.ssp,
                       fontFamily: 'WorkSans',
                       fontWeight: FontWeight.w600,
                       color: Colors.white,
@@ -200,19 +204,19 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 ),
                 RaisedButton(
                   color: Colors.grey[200],
-                  elevation: 8.0,
+                  elevation: 8.0.h,
                   shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(20.0),
+                    borderRadius: BorderRadius.circular(20.0.h),
                   ),
-                  padding:
-                      EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+                  padding: EdgeInsets.only(
+                      left: 15.w, bottom: 11.h, top: 11.h, right: 15.w),
                   onPressed: () {
                     Navigator.pop(context);
                   },
                   child: Text(
                     'Cancel',
                     style: TextStyle(
-                      fontSize: 22.0,
+                      fontSize: 22.0.ssp,
                       fontFamily: 'WorkSans',
                       fontWeight: FontWeight.w600,
                       color: Colors.white,

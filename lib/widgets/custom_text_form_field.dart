@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextFormField extends StatefulWidget {
   final String labelText;
@@ -22,10 +23,13 @@ class CustomTextFormField extends StatefulWidget {
 class _CustomTextFormFieldState extends State<CustomTextFormField> {
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(432.0, 816.0), allowFontScaling: true);
+
     return Material(
-      elevation: 3.0,
+      elevation: 3.0.h,
       shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(10.0),
+        borderRadius: BorderRadius.circular(10.0.h),
       ),
       child: TextFormField(
         cursorColor: Colors.black,
@@ -42,7 +46,7 @@ class _CustomTextFormFieldState extends State<CustomTextFormField> {
             fontFamily: 'WorkSans',
           ),
           contentPadding:
-              EdgeInsets.only(left: 15, bottom: 11, top: 11, right: 15),
+              EdgeInsets.only(left: 15.w, bottom: 11.h, top: 11.h, right: 15.w),
         ),
         controller: widget.controller,
         textInputAction: TextInputAction.next,

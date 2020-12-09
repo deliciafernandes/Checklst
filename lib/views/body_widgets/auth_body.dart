@@ -5,6 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:modal_progress_hud/modal_progress_hud.dart';
 import 'package:provider/provider.dart';
 
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 class AuthBody extends StatefulWidget {
   @override
   _AuthBodyState createState() => _AuthBodyState();
@@ -77,13 +79,16 @@ class _AuthBodyState extends State<AuthBody> {
 
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context,
+        designSize: Size(432.0, 816.0), allowFontScaling: true);
+
     return ModalProgressHUD(
       inAsyncCall: _showSpinner,
       color: Colors.transparent,
       progressIndicator: CircularProgressIndicator(
           valueColor: new AlwaysStoppedAnimation<Color>(Colors.black)),
       child: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
+        padding: EdgeInsets.symmetric(horizontal: 20.0.w, vertical: 20.0.h),
         child: _requestedBody == 'login'
             ? SingleChildScrollView(
                 child: Column(
@@ -93,24 +98,24 @@ class _AuthBodyState extends State<AuthBody> {
                     Text(
                       'Welcome Back,',
                       style: TextStyle(
-                        fontSize: 25.5,
+                        fontSize: 25.5.ssp,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'WorkSans',
                       ),
                     ),
-                    SizedBox(height: 3.0),
+                    SizedBox(height: 3.0.h),
                     Text(
                       'Login to save your reminders on all devices.',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 16.0.ssp,
                         fontFamily: 'WorkSans',
                         color: Colors.grey[500],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.symmetric(vertical: 20.0),
-                      width: 200.0,
-                      height: 200.0,
+                      margin: EdgeInsets.symmetric(vertical: 20.0.h),
+                      width: 200.0.w,
+                      height: 200.0.h,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -130,6 +135,7 @@ class _AuthBodyState extends State<AuthBody> {
                               errorText: 'Please input email address',
                               controller: _emailController),
                           Padding(
+                            //TODO: responsive
                             padding:
                                 const EdgeInsets.only(top: 10.0, bottom: 10.0),
                             child: CustomTextFormField(
@@ -153,30 +159,33 @@ class _AuthBodyState extends State<AuthBody> {
                               },
                             ),
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 30.0.h),
                           ButtonTheme(
-                            minWidth: MediaQuery.of(context).size.width / 1.5,
-                            height: 50.0,
+                            minWidth: MediaQuery.of(context).size.width / 1.5.w,
+                            height: 50.0.h,
                             child: RaisedButton(
-                              elevation: 10.0,
+                              elevation: 10.0.h,
                               color: Colors.black,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
+                                borderRadius: BorderRadius.circular(25.0.h),
                               ),
                               padding: EdgeInsets.only(
-                                  left: 15, bottom: 11, top: 11, right: 15),
+                                  left: 15.w,
+                                  bottom: 11.h,
+                                  top: 11.h,
+                                  right: 15.w),
                               onPressed: _submitSignIn,
                               child: Text(
                                 'Log in',
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 20.0.ssp,
                                   color: Colors.white,
                                   fontFamily: 'WorkSans',
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 30.0.h),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -216,24 +225,24 @@ class _AuthBodyState extends State<AuthBody> {
                     Text(
                       'Create Your Account,',
                       style: TextStyle(
-                        fontSize: 25.5,
+                        fontSize: 25.5.ssp,
                         fontWeight: FontWeight.w500,
                         fontFamily: 'WorkSans',
                       ),
                     ),
-                    SizedBox(height: 3.0),
+                    SizedBox(height: 3.0.h),
                     Text(
                       'Sign up and get started.',
                       style: TextStyle(
-                        fontSize: 16.0,
+                        fontSize: 16.0.ssp,
                         fontFamily: 'WorkSans',
                         color: Colors.grey[500],
                       ),
                     ),
                     Container(
-                      margin: EdgeInsets.only(top: 10.0, bottom: 10.0),
-                      width: 220.0,
-                      height: 220.0,
+                      margin: EdgeInsets.only(top: 10.0.h, bottom: 10.0.h),
+                      width: 220.0.w,
+                      height: 220.0.h,
                       alignment: Alignment.center,
                       decoration: BoxDecoration(
                         image: DecorationImage(
@@ -254,7 +263,8 @@ class _AuthBodyState extends State<AuthBody> {
                             controller: _nameController,
                           ),
                           Padding(
-                            padding: EdgeInsets.only(top: 10.0, bottom: 10.0),
+                            padding:
+                                EdgeInsets.only(top: 10.0.h, bottom: 10.0.h),
                             child: CustomTextFormField(
                                 labelText: 'Email',
                                 textInputType: TextInputType.emailAddress,
@@ -263,6 +273,7 @@ class _AuthBodyState extends State<AuthBody> {
                                 controller: _emailController),
                           ),
                           Padding(
+                            //TODO : responsive
                             padding: const EdgeInsets.only(bottom: 10.0),
                             child: CustomTextFormField(
                                 labelText: 'Password',
@@ -270,30 +281,33 @@ class _AuthBodyState extends State<AuthBody> {
                                 errorText: 'Please input password',
                                 controller: _passwordController),
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 30.0.h),
                           ButtonTheme(
-                            minWidth: MediaQuery.of(context).size.width / 1.5,
-                            height: 50.0,
+                            minWidth: MediaQuery.of(context).size.width / 1.5.w,
+                            height: 50.0.h,
                             child: RaisedButton(
-                              elevation: 10.0,
+                              elevation: 10.0.h,
                               color: Colors.black,
                               shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(25.0),
+                                borderRadius: BorderRadius.circular(25.0.h),
                               ),
                               padding: EdgeInsets.only(
-                                  left: 15, bottom: 11, top: 11, right: 15),
+                                  left: 15.w,
+                                  bottom: 11.h,
+                                  top: 11.h,
+                                  right: 15.w),
                               onPressed: _submitSignUp,
                               child: Text(
                                 'Sign up',
                                 style: TextStyle(
-                                  fontSize: 20.0,
+                                  fontSize: 20.0.ssp,
                                   color: Colors.white,
                                   fontFamily: 'WorkSans',
                                 ),
                               ),
                             ),
                           ),
-                          SizedBox(height: 30.0),
+                          SizedBox(height: 30.0.ssp),
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: <Widget>[
@@ -319,7 +333,7 @@ class _AuthBodyState extends State<AuthBody> {
                               ),
                             ],
                           ),
-                          SizedBox(height: 180.0),
+                          SizedBox(height: 180.0.ssp),
                         ],
                       ),
                     ),
