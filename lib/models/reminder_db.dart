@@ -5,7 +5,7 @@ import 'check_if_user_logged_in.dart';
 import 'reminder.dart';
 
 class ReminderDB extends ChangeNotifier {
-  final _firestore = Firestore.instance;
+  final _firestore = FirebaseFirestore.instance;
   CheckIfUserLoggedIn checkIfUserLoggedIn = CheckIfUserLoggedIn();
 
   List<Reminder> _reminderList = [

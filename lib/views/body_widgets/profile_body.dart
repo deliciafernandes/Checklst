@@ -1,9 +1,6 @@
 import 'package:checklst/models/check_if_user_logged_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:geocoding/geocoding.dart';
-import 'package:geolocator/geolocator.dart';
-import 'package:flutter/services.dart';
 
 CheckIfUserLoggedIn checkIfUserLoggedIn = CheckIfUserLoggedIn();
 String email = checkIfUserLoggedIn.getCurrentUserEmail();
@@ -19,48 +16,6 @@ class _ProfileBodyState extends State<ProfileBody> {
 
   signOut() async {
     await auth.signOut();
-  }
-
-  Position _currentPosition;
-
-  Future<void> _getCurrentPosition() async {
-    // verify permissions
-    LocationPermission permission = await Geolocator.requestPermission();
-    // if (permission == LocationPermission.denied ||
-    //     permission == LocationPermission.deniedForever) {
-    //   await Geolocator.openAppSettings();
-    //   await Geolocator.openLocationSettings();
-    // }
-    // get current position
-    _currentPosition = await Geolocator.getCurrentPosition(
-        desiredAccuracy: LocationAccuracy.high);
-
-    // get address
-    String _currentAddress = await _getGeolocationAddress(_currentPosition);
-  }
-
-  Future<String> _getGeolocationAddress(Position position) async {
-    // geocoding
-
-    _currentPosition = Position(latitude: 19.112801, longitude: 72.862480);
-
-    var places = await placemarkFromCoordinates(
-      position.latitude,
-      position.longitude,
-    );
-    if (places != null && places.isNotEmpty) {
-      final Placemark place = places.first;
-      return "${place.thoroughfare}, ${place.locality}";
-    }
-
-    return "No address available";
-  }
-
-  @override
-  void initState() {
-    // _getCurrentPosition();
-    _getGeolocationAddress(Position(latitude: 19.112801, longitude: 72.862480));
-    super.initState();
   }
 
   @override
