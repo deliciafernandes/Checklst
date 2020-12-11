@@ -13,8 +13,8 @@ class CheckIfUserLoggedIn extends ChangeNotifier {
   final _auth = FirebaseAuth.instance;
   bool getCurrentUser() {
     try {
-      if (_auth.currentUser == null) {
-        _userLoggedIn = false;
+      if (_auth.currentUser != null) {
+        _userLoggedIn = true;
       }
     } catch (e) {
       print(e);
