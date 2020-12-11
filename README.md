@@ -5,3 +5,7 @@
 - Responsive
 
 [Link to result video](https://github.com/deliciafernandes/Checklst/blob/main/Checklst.mov)
+
+Branchs: 
+- main : Working version
+- experimental : User specific reminder retrieval for access on multiple devices
