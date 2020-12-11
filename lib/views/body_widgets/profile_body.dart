@@ -1,7 +1,9 @@
 import 'package:checklst/models/check_if_user_logged_in.dart';
+import 'package:checklst/utilities/location_service.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
 
 CheckIfUserLoggedIn checkIfUserLoggedIn = CheckIfUserLoggedIn();
 String email = checkIfUserLoggedIn.getCurrentUserEmail();
@@ -12,11 +14,27 @@ class ProfileBody extends StatefulWidget {
 }
 
 class _ProfileBodyState extends State<ProfileBody> {
-  String location = 'Mahalaxmi, Mumbai.';
+  LocationService locationService = LocationService();
+  var _userLocation = 'Mumbai.';
+
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   signOut() async {
     await auth.signOut();
+    setState(() {});
+  }
+
+  //Needs to be future!
+  Future getLocationData() async {
+    //Fetching _userLocation
+    _userLocation = await locationService.getLocation();
+    setState(() {});
+  }
+
+  @override
+  void initState() {
+    getLocationData();
+    super.initState();
   }
 
   @override
@@ -90,7 +108,7 @@ class _ProfileBodyState extends State<ProfileBody> {
                 ),
               ),
               Text(
-                location,
+                _userLocation,
                 style: TextStyle(
                   fontSize: 18.0.ssp,
                   fontFamily: 'WorkSans',
@@ -135,95 +153,6 @@ class _ProfileBodyState extends State<ProfileBody> {
           ),
         ],
       ),
-      // child: Column(
-      //   crossAxisAlignment: CrossAxisAlignment.stretch,
-      //   children: [
-      //     Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Text(
-      //           'Hello, Dwayne!',
-      //           // 'Hello, ${_nameController.text}!',
-      //           style: TextStyle(
-      //             fontSize: 25.5,
-      //             fontWeight: FontWeight.w500,
-      //             fontFamily: 'WorkSans',
-      //           ),
-      //         ),
-      //         SizedBox(height: 3.0),
-      //         Text(
-      //           'Hope you\'re having a good day.',
-      //           style: TextStyle(
-      //             fontSize: 20.0,
-      //             fontFamily: 'WorkSans',
-      //             color: Colors.grey[500],
-      //           ),
-      //         ),
-      //       ],
-      //     ),
-      //     SizedBox(height: 40.0),
-      //     Row(
-      //       children: [
-      //         Text(
-      //           'Email:  ',
-      //           style: TextStyle(
-      //             fontSize: 20.0,
-      //             fontFamily: 'WorkSans',
-      //             color: Colors.black,
-      //           ),
-      //         ),
-      //         Text(
-      //           'test@gmail.com',
-      //           // '${_emailController.text}',
-      //           style: TextStyle(
-      //             fontSize: 20.0,
-      //             fontFamily: 'WorkSans',
-      //             color: Colors.grey[500],
-      //           ),
-      //         )
-      //       ],
-      //     ),
-      //     SizedBox(height: 20.0),
-      //     Column(
-      //       crossAxisAlignment: CrossAxisAlignment.start,
-      //       children: [
-      //         Row(
-      //           children: [
-      //             Text(
-      //               'Location:  ',
-      //               style: TextStyle(
-      //                   fontSize: 20.0,
-      //                   fontFamily: 'WorkSans',
-      //                   color: Colors.black),
-      //             ),
-      //             Text(
-      //               'Andheri east',
-      //               style: TextStyle(
-      //                   fontSize: 20.0,
-      //                   fontFamily: 'WorkSans',
-      //                   color: Colors.black),
-      //             ),
-      //           ],
-      //         ),
-      //         SizedBox(height: 10.0),
-      //         // Material(
-      //         //   elevation: 8.0,
-      //         //   shape: RoundedRectangleBorder(
-      //         //       borderRadius: BorderRadius.circular(20.0)),
-      //         //   child: Container(
-      //         //     width: MediaQuery.of(context).size.width,
-      //         //     height: MediaQuery.of(context).size.height / 1.9,
-      //         //     decoration: BoxDecoration(
-      //         //       color: Colors.blueAccent,
-      //         //       borderRadius:
-      //         //           BorderRadius.all(Radius.circular(20.0)),
-      //         //     ),
-      //         //   ),
-      //         // )
-      //       ],
-      //     ),
-      //   ],
-      // ),
     );
   }
 }

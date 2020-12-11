@@ -24,6 +24,8 @@ dependencies:
   date_time_picker: ^1.1.0
   flutter_local_notifications: ^3.0.1+6
   intl: ^0.16.1
+  geolocator: ^5.3.2+2
+  geocoder: ^0.2.1
 
 # Google Services:
   firebase_core: ^0.5.2+1
