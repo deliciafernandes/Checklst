@@ -33,14 +33,21 @@ class ReminderDB extends ChangeNotifier {
       time: time,
     );
 
+    //Add reminder to reminder local db
     _reminderList.add(reminder);
-    _firestore.collection('reminders').add({
-      'title': title,
-      'description': description,
-      'date': date,
-      'time': time,
-    });
 
+    //Add reminder to reminder remote db only if user is logged in
+    if (checkIfUserLoggedIn.getCurrentUser()) {
+      _firestore.collection('reminders').add({
+        'title': title,
+        'description': description,
+        'date': date,
+        'time': time,
+        'user': checkIfUserLoggedIn.getCurrentUserEmail(),
+      });
+    }
+
+    // retrieving user specific reminders
     // if (checkIfUserLoggedIn.getCurrentUserEmail() != null) {
     //   _reminderList.add(reminder);
     //   _firestore.collection('reminders').add({

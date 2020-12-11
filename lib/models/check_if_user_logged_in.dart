@@ -7,6 +7,8 @@ class CheckIfUserLoggedIn extends ChangeNotifier {
 
   String getCurrentUserEmail() {
     loggedInUser = _auth.currentUser;
+
+    print(loggedInUser.email);
     return loggedInUser.email;
   }
 
@@ -16,6 +18,7 @@ class CheckIfUserLoggedIn extends ChangeNotifier {
       if (_auth.currentUser != null) {
         _userLoggedIn = true;
       }
+      print(_auth.currentUser);
     } catch (e) {
       print(e);
     }
