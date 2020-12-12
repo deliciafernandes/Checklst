@@ -1,4 +1,5 @@
 import 'package:checklst/models/reminder_db.dart';
+import 'package:checklst/utilities/location_service.dart';
 import 'package:checklst/utilities/routing_constants.dart';
 import 'package:date_time_picker/date_time_picker.dart';
 import 'package:flutter/material.dart';
@@ -15,6 +16,9 @@ class BottomReminderSheet extends StatefulWidget {
 }
 
 class _BottomReminderSheetState extends State<BottomReminderSheet> {
+  LocationService locationService = LocationService();
+  var userLocation = 'Mumbai';
+
   bool _isSwitched = false;
   final titleTextController = TextEditingController();
   final descriptionTextController = TextEditingController();
@@ -24,9 +28,12 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
   int hours;
   int minutes;
 
+  void getUserLocation() async {
+    userLocation = await locationService.getLocation();
+  }
+
   void formatDate() {
     DateTime parsedDate = DateTime.parse(date);
-    print(parsedDate);
 
     var newFormat = DateFormat("d MMM y");
     date = newFormat.format(parsedDate);
@@ -42,14 +49,13 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
 
     hours = int.parse(reminderTime[0]) - int.parse(currentTime[0]);
     minutes = int.parse(reminderTime[1]) - int.parse(currentTime[1]) - 1;
-
-    print('$hours $minutes');
   }
 
   FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
       FlutterLocalNotificationsPlugin();
 
   void initState() {
+    getUserLocation();
     super.initState();
     var initializationSettingsAndroid =
         AndroidInitializationSettings('playstore');
@@ -251,28 +257,28 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                 padding: EdgeInsets.only(
                     left: 15.w, bottom: 11.h, top: 11.h, right: 15.w),
                 onPressed: () {
-                  //TODO: fixup location functionality
-                  scheduleNotificationBasedOnTime();
-                  Provider.of<ReminderDB>(context, listen: false).addReminder(
-                      titleTextController.text,
-                      descriptionTextController.text,
-                      date,
-                      time);
+                  if (titleTextController.text == '' ||
+                      descriptionTextController.text == '') {
+                    //Test case if user clicks add with null title and description
+                  } else {
+                    // Reminder based on location
+                    if (_isSwitched) {
+                      scheduleNotificationBasedOnLocation();
+                      Provider.of<ReminderDB>(context, listen: false)
+                          .addReminderBasedOnLocation(titleTextController.text,
+                              descriptionTextController.text, userLocation);
+                      titleTextController.clear();
+                      titleTextController.clear();
+                    } else {
+                      scheduleNotificationBasedOnTime();
+                      Provider.of<ReminderDB>(context, listen: false)
+                          .addReminder(titleTextController.text,
+                              descriptionTextController.text, date, time);
 
-                  titleTextController.clear();
-                  titleTextController.clear();
-                  Navigator.pop(context);
+                      titleTextController.clear();
+                      titleTextController.clear();
+                    }
 
-                  // Reminder based on location
-                  if (_isSwitched) {
-                    scheduleNotificationBasedOnLocation();
-                    // Provider.of<ReminderDB>(context, listen: false).addReminder(
-                    //     titleTextController.text,
-                    //     descriptionTextController.text,
-                    // );
-
-                    titleTextController.clear();
-                    titleTextController.clear();
                     Navigator.pop(context);
                   }
                 },

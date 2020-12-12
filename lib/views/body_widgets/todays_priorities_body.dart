@@ -39,6 +39,8 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
                   description: simple.description,
                   date: simple.date,
                   time: simple.time,
+                  userLocation: simple.userLocation,
+                  isLocationBased: simple.userLocation != null ? true : false,
                   isChecked: simple.isDone,
                   checkBoxCallBack: (checkBoxState) {
                     reminderDB.updateReminder(simple);

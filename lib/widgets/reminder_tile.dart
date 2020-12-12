@@ -8,10 +8,13 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class ReminderTile extends StatefulWidget {
+  final bool isLocationBased;
+
   final String title;
   final String description;
   final String date;
   final String time;
+  final userLocation;
   final bool isChecked;
   final Function checkBoxCallBack;
   final Function deleteCallBack;
@@ -19,8 +22,10 @@ class ReminderTile extends StatefulWidget {
   ReminderTile({
     @required this.title,
     @required this.description,
-    @required this.date,
-    @required this.time,
+    this.date,
+    this.time,
+    this.userLocation,
+    @required this.isLocationBased,
     this.isChecked,
     this.checkBoxCallBack,
     this.deleteCallBack,
@@ -138,42 +143,81 @@ class _ReminderTileState extends State<ReminderTile> {
                         ),
                       ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            Icon(
-                              Icons.alarm,
-                              // color: Colors.grey[350],
-                              color: _color,
-                              size: 15.0.h,
-                            ),
-                            Text(
-                              ' ${widget.date}, ${widget.time}',
-                              style: TextStyle(
-                                fontSize: 13.0.ssp,
-                                fontFamily: 'WorkSans',
-                                fontWeight: FontWeight.w600,
-                                // color: Colors.grey[350],
-                                color: _color,
+                    widget.isLocationBased
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.location_on,
+                                    // color: Colors.grey[350],
+                                    color: _color,
+                                    size: 15.0.h,
+                                  ),
+                                  Text(
+                                    widget.userLocation,
+                                    style: TextStyle(
+                                      fontSize: 13.0.ssp,
+                                      fontFamily: 'WorkSans',
+                                      fontWeight: FontWeight.w600,
+                                      // color: Colors.grey[350],
+                                      color: _color,
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ),
-                          ],
-                        ),
-                        Transform.scale(
-                          scale: 0.7,
-                          child: CircularCheckBox(
-                            value: widget.isChecked,
-                            activeColor: Colors.grey[350],
-                            checkColor: Colors.black,
-                            inactiveColor: Colors.grey,
-                            materialTapTargetSize: MaterialTapTargetSize.padded,
-                            onChanged: widget.checkBoxCallBack,
+                              Transform.scale(
+                                scale: 0.7,
+                                child: CircularCheckBox(
+                                  value: widget.isChecked,
+                                  activeColor: Colors.grey[350],
+                                  checkColor: Colors.black,
+                                  inactiveColor: Colors.grey,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.padded,
+                                  onChanged: widget.checkBoxCallBack,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Row(
+                                children: [
+                                  Icon(
+                                    Icons.alarm,
+                                    // color: Colors.grey[350],
+                                    color: _color,
+                                    size: 15.0.h,
+                                  ),
+                                  Text(
+                                    ' ${widget.date}, ${widget.time}',
+                                    style: TextStyle(
+                                      fontSize: 13.0.ssp,
+                                      fontFamily: 'WorkSans',
+                                      fontWeight: FontWeight.w600,
+                                      // color: Colors.grey[350],
+                                      color: _color,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              Transform.scale(
+                                scale: 0.7,
+                                child: CircularCheckBox(
+                                  value: widget.isChecked,
+                                  activeColor: Colors.grey[350],
+                                  checkColor: Colors.black,
+                                  inactiveColor: Colors.grey,
+                                  materialTapTargetSize:
+                                      MaterialTapTargetSize.padded,
+                                  onChanged: widget.checkBoxCallBack,
+                                ),
+                              ),
+                            ],
                           ),
-                        ),
-                      ],
-                    ),
                   ],
                 ),
               ),

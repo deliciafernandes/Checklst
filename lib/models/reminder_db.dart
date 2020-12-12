@@ -10,10 +10,12 @@ class ReminderDB extends ChangeNotifier {
 
   List<Reminder> _reminderList = [
     // Reminder(
-    //     title: 'Reminder Title',
-    //     description: 'Reminder description',
-    //     date: 'Today',
-    //     time: '17:00 pm'),
+    //   title: 'Reminder Title',
+    //   description: 'Reminder description',
+    //   date: 'Today',
+    //   time: '17:00 pm',
+    //   userLocation: 'Andheri East',
+    // ),
   ];
 
   UnmodifiableListView<Reminder> get reminderList {
@@ -57,6 +59,33 @@ class ReminderDB extends ChangeNotifier {
     //     'time': time,
     //   });
     // }
+
+    notifyListeners();
+  }
+
+  void addReminderBasedOnLocation(
+    String title,
+    String description,
+    var userLocation,
+  ) {
+    final reminder = Reminder(
+      title: title,
+      description: description,
+      userLocation: userLocation,
+    );
+
+    //Add reminder to reminder local db
+    _reminderList.add(reminder);
+
+    //Add reminder to reminder remote db only if user is logged in
+    if (checkIfUserLoggedIn.getCurrentUser()) {
+      _firestore.collection('locationBasedReminders').add({
+        'title': title,
+        'description': description,
+        'userLocation': userLocation,
+        'user': checkIfUserLoggedIn.getCurrentUserEmail(),
+      });
+    }
 
     notifyListeners();
   }

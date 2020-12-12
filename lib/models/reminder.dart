@@ -3,6 +3,7 @@ class Reminder {
   String description;
   String date;
   String time;
+  var userLocation;
 
   bool isDone;
 
@@ -15,5 +16,6 @@ class Reminder {
       this.description,
       this.date,
       this.time,
+      this.userLocation,
       this.isDone = false});
 }
