@@ -108,7 +108,16 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
         platformChannelSpecifics);
   }
 
-  Future<void> scheduleNotificationBasedOnLocation() async {}
+  Future<void> scheduleNotificationBasedOnLocation() async {
+    var android = new AndroidNotificationDetails(
+        'id', 'channel ', 'description',
+        priority: Priority.high, importance: Importance.max);
+    var iOS = new IOSNotificationDetails();
+    var platform = new NotificationDetails(android: android);
+    await flutterLocalNotificationsPlugin.show(
+        0, titleTextController.text, descriptionTextController.text, platform,
+        payload: 'Your Checklst. Reminder!');
+  }
 
   @override
   Widget build(BuildContext context) {
