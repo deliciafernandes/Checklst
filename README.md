@@ -64,3 +64,7 @@ Cross Platform Location Based Reminder App with Cloud Functionality.
 1. Clone repo and create a new branch: `$ https://github.com/deliciafernandes/Checklst -b name_for_new_branch`.
 2. Make changes and test.
 3. Submit Pull Request with comprehensive description of changes.
+
+<p align="center">
+<b><a href="https://github.com/deliciafernandes/">Keep fluttering!</a></b>
+</p>
