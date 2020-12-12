@@ -5,6 +5,8 @@
 1. <a href="#Details">Project Details</a>
 2. <a href="#FS">File Structure</a>
 
+---
+
 ### <a name="Details">1. Project Details</a>
 Cross Platform Location Based Reminder App with Cloud Functionality.
 
