@@ -4,6 +4,8 @@
 ### Table of Contents
 1. <a href="#Details">Project Details</a>
 2. <a href="#FS">File Structure</a>
+3. <a href="#Clone">3. Once cloned, follow</a>
+4. <a href="#Contribute">4. How to Contribute</a>
 
 ---
 
@@ -24,9 +26,9 @@ Cross Platform Location Based Reminder App with Cloud Functionality.
 <br>(4) [Packages file, pubspec.yaml](https://github.com/deliciafernandes/Checklst/blob/main/pubspec.yaml "pubspec.yaml")
 <br>(5) [Flutter Code in Library Folder](https://github.com/deliciafernandes/Checklst/tree/main/lib)
 
-# Once cloned, follow:
+### <a name="Clone">3. Once cloned, follow:</a>
 
-### Android:
+**Android:**
 1. This is a no brainer, "android/app/google-services.json"
 2. Make sure app has a local.properties file in the `Project -> Android` folder, if not:
 	* Go to your  `Project -> Android`
@@ -43,7 +45,7 @@ Cross Platform Location Based Reminder App with Cloud Functionality.
 3. Next, in `local.properties` add Google Maps API Key!
 4. If you don't have Google Maps Setup,  follow [Adding Google Maps API key to Android App precisely!](https://developers.google.com/maps/documentation/android-sdk/get-api-key)
 
-## After setup, Run:
+**After setup, Run:**
 - flutter clean
 - flutter doctor
 - flutter pub get
@@ -57,7 +59,7 @@ Cross Platform Location Based Reminder App with Cloud Functionality.
 - flutter run
 
 ---
-### **How to Contribute:**
+### <a name="Contribute">**4. How to Contribute:**</a>
 
 1. Clone repo and create a new branch: `$ https://github.com/deliciafernandes/Checklst -b name_for_new_branch`.
 2. Make changes and test.
