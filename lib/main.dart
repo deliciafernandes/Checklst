@@ -33,7 +33,6 @@ class _ChecklstState extends State<Checklst> {
         // To define the home view as the starting view, instead of setting the home property to a widget we’ll use initialRoute instead.
         // initialRoute: ... vs home: ...
         onGenerateRoute: router.generateRoute,
-        // initialRoute: kLocationSelectionView,
         initialRoute: kIndexView,
       ),
     );

@@ -1,4 +1,5 @@
 import 'package:checklst/models/check_if_user_logged_in.dart';
+import 'package:checklst/models/reminder_db.dart';
 import 'package:checklst/widgets/bottom_reminder_modal_sheet.dart';
 import 'package:checklst/widgets/fab_bottom_app_bar.dart';
 import 'package:flutter/material.dart';
@@ -31,6 +32,9 @@ class _IndexViewState extends State<IndexView> {
 
     ScreenUtil.init(context,
         designSize: Size(_width, _height), allowFontScaling: true);
+
+    ReminderDB reminderDB = ReminderDB();
+    reminderDB.checkIfRemindersExist();
 
     return ChangeNotifierProvider<CheckIfUserLoggedIn>(
       create: (context) => CheckIfUserLoggedIn(),

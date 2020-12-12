@@ -19,8 +19,9 @@ class _ProfileBodyState extends State<ProfileBody> {
   final FirebaseAuth auth = FirebaseAuth.instance;
 
   signOut() async {
-    await auth.signOut();
-    setState(() {});
+    // TODO: FIX SIGN OUT
+    // await auth.signOut();
+    // setState(() {});
   }
 
   //Needs to be future!

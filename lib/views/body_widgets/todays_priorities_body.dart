@@ -25,32 +25,37 @@ class _TodaysPrioritiesBodyState extends State<TodaysPrioritiesBody> {
         height: 550.0,
         child: Consumer<ReminderDB>(
           builder: (context, reminderDB, child) {
-            return ListView.builder(
-              scrollDirection: Axis.vertical,
-              physics: const BouncingScrollPhysics(
-                  parent: AlwaysScrollableScrollPhysics()),
-              //TODO : responsive
-              padding: EdgeInsets.symmetric(vertical: 10.0),
-              shrinkWrap: true,
-              itemBuilder: (context, index) {
-                final simple = reminderDB.reminderList[index];
-                return ReminderTile(
-                  title: simple.title,
-                  description: simple.description,
-                  date: simple.date,
-                  time: simple.time,
-                  userLocation: simple.userLocation,
-                  isLocationBased: simple.userLocation != null ? true : false,
-                  isChecked: simple.isDone,
-                  checkBoxCallBack: (checkBoxState) {
-                    reminderDB.updateReminder(simple);
+            return Column(
+              children: [
+                ListView.builder(
+                  scrollDirection: Axis.vertical,
+                  physics: const BouncingScrollPhysics(
+                      parent: AlwaysScrollableScrollPhysics()),
+                  //TODO : responsive
+                  padding: EdgeInsets.symmetric(vertical: 10.0),
+                  shrinkWrap: true,
+                  itemBuilder: (context, index) {
+                    final simple = reminderDB.reminderList[index];
+                    return ReminderTile(
+                      title: simple.title,
+                      description: simple.description,
+                      date: simple.date,
+                      time: simple.time,
+                      userLocation: simple.userLocation,
+                      isLocationBased:
+                          simple.userLocation != null ? true : false,
+                      isChecked: simple.isDone,
+                      checkBoxCallBack: (checkBoxState) {
+                        reminderDB.updateReminder(simple);
+                      },
+                      deleteCallBack: () {
+                        reminderDB.deleteReminder(simple);
+                      },
+                    );
                   },
-                  deleteCallBack: () {
-                    reminderDB.deleteReminder(simple);
-                  },
-                );
-              },
-              itemCount: reminderDB.reminderList.length,
+                  itemCount: reminderDB.reminderList.length,
+                ),
+              ],
             );
           },
         ),

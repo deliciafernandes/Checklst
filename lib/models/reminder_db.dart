@@ -18,6 +18,16 @@ class ReminderDB extends ChangeNotifier {
     // ),
   ];
 
+  List<Reminder> _retrievedReminderList = [
+    // Reminder(
+    //   title: 'Reminder Title',
+    //   description: 'Reminder description',
+    //   date: 'Today',
+    //   time: '17:00 pm',
+    //   userLocation: 'Andheri East',
+    // ),
+  ];
+
   UnmodifiableListView<Reminder> get reminderList {
     return UnmodifiableListView(_reminderList);
   }
@@ -48,17 +58,6 @@ class ReminderDB extends ChangeNotifier {
         'user': checkIfUserLoggedIn.getCurrentUserEmail(),
       });
     }
-
-    // retrieving user specific reminders
-    // if (checkIfUserLoggedIn.getCurrentUserEmail() != null) {
-    //   _reminderList.add(reminder);
-    //   _firestore.collection('reminders').add({
-    //     'title': title,
-    //     'description': description,
-    //     'date': date,
-    //     'time': time,
-    //   });
-    // }
 
     notifyListeners();
   }
@@ -100,5 +99,50 @@ class ReminderDB extends ChangeNotifier {
 
     // _firestore.collection('reminders').document('wgbhYkrUEKDMnsvYTiHZ')
     notifyListeners();
+  }
+
+  //if user has logged in and has some past reminders, retrieve those user specific reminders.
+  //listen to firebase and if they do exist, add it to _reminderList based on email of the user
+  Future<void> checkIfRemindersExist() async {
+    String userEmail = checkIfUserLoggedIn.getCurrentUserEmail();
+    if (userEmail != null) {
+      await for (var snapshot
+          in _firestore.collection('locationBasedReminders').snapshots()) {
+        for (var snapshot in snapshot.docs) {
+          if (snapshot.data()['user'] == userEmail) {
+            var title = snapshot.data()['title'];
+            var description = snapshot.data()['description'];
+            var userLocation = snapshot.data()['userLocation'];
+
+            _retrievedReminderList.add(Reminder(
+                title: title,
+                description: description,
+                userLocation: userLocation));
+            print('$title $userLocation');
+          }
+        }
+        break;
+      }
+
+      await for (var snapshot
+          in _firestore.collection('reminders').snapshots()) {
+        for (var snapshot in snapshot.docs) {
+          if (snapshot.data()['user'] == userEmail) {
+            var title = snapshot.data()['title'];
+            var description = snapshot.data()['description'];
+            var date = snapshot.data()['date'];
+            var time = snapshot.data()['time'];
+
+            _retrievedReminderList.add(Reminder(
+                title: title,
+                description: description,
+                date: date,
+                time: time));
+            print('$title $date');
+          }
+        }
+        break;
+      }
+    }
   }
 }
