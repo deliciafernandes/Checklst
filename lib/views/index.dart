@@ -33,9 +33,6 @@ class _IndexViewState extends State<IndexView> {
     ScreenUtil.init(context,
         designSize: Size(_width, _height), allowFontScaling: true);
 
-    ReminderDB reminderDB = ReminderDB();
-    reminderDB.checkIfRemindersExist();
-
     return ChangeNotifierProvider<CheckIfUserLoggedIn>(
       create: (context) => CheckIfUserLoggedIn(),
       child: Scaffold(
