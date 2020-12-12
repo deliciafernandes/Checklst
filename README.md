@@ -4,8 +4,8 @@
 ### Table of Contents
 1. <a href="#Details">Project Details</a>
 2. <a href="#FS">File Structure</a>
-3. <a href="#Clone">3. Once cloned, follow</a>
-4. <a href="#Contribute">4. How to Contribute</a>
+3. <a href="#Clone">Once cloned, follow</a>
+4. <a href="#Contribute">How to Contribute</a>
 
 ---
 
