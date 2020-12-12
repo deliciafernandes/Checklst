@@ -10,7 +10,7 @@ class LocationSelectionView extends StatefulWidget {
 
 class _LocationSelectionViewState extends State<LocationSelectionView> {
   bool _searchPressed = false;
-  bool _currentLocationPressed = true;
+  bool _currentLocationPressed = false;
 
   @override
   Widget build(BuildContext context) {

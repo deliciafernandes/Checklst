@@ -135,18 +135,18 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
             padding: EdgeInsets.symmetric(vertical: 30.0.h),
             child: Column(
               children: [
+                ReminderSheetTextField(
+                    taskTextController: titleTextController,
+                    hintText: 'Reminder Title'),
+                SizedBox(height: 10.0.h),
+                ReminderSheetTextField(
+                    taskTextController: descriptionTextController,
+                    hintText: 'Reminder Description'),
+                SizedBox(height: 10.0.h),
                 Visibility(
                   visible: !_isSwitched,
                   child: Column(
                     children: [
-                      ReminderSheetTextField(
-                          taskTextController: titleTextController,
-                          hintText: 'Reminder Title'),
-                      SizedBox(height: 10.0.h),
-                      ReminderSheetTextField(
-                          taskTextController: descriptionTextController,
-                          hintText: 'Reminder Description'),
-                      SizedBox(height: 10.0.h),
                       DateTimePicker(
                         type: DateTimePickerType.date,
                         dateMask: 'd MMM, yyyy',
@@ -262,6 +262,19 @@ class _BottomReminderSheetState extends State<BottomReminderSheet> {
                   titleTextController.clear();
                   titleTextController.clear();
                   Navigator.pop(context);
+
+                  // Reminder based on location
+                  if (_isSwitched) {
+                    scheduleNotificationBasedOnLocation();
+                    // Provider.of<ReminderDB>(context, listen: false).addReminder(
+                    //     titleTextController.text,
+                    //     descriptionTextController.text,
+                    // );
+
+                    titleTextController.clear();
+                    titleTextController.clear();
+                    Navigator.pop(context);
+                  }
                 },
                 child: Text(
                   'Add',

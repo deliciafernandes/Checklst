@@ -48,12 +48,12 @@ class LocationService extends ChangeNotifier {
 
     try {
       Position position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
       return position.latitude;
     } catch (e) {
       print(e);
-      return 20.5937;
+      return 19.109906;
     }
   }
 
@@ -64,13 +64,13 @@ class LocationService extends ChangeNotifier {
 
     try {
       Position position = await Geolocator()
-          .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
+          .getCurrentPosition(desiredAccuracy: LocationAccuracy.high);
 
       return position.longitude;
     } catch (e) {
       print(e);
 
-      return 78.9629;
+      return 72.867671;
     }
   }
 }
