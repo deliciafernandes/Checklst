@@ -120,11 +120,17 @@ class _IndexViewState extends State<IndexView> {
         floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            showModalBottomSheet(
+            showModalBottomSheet<dynamic>(
               context: context,
               isScrollControlled: true,
               backgroundColor: Colors.transparent,
-              builder: (context) => BottomReminderSheet(),
+              builder: (context) {
+                return Wrap(
+                  children: [
+                    BottomReminderSheet(),
+                  ],
+                );
+              },
             );
           },
           highlightElevation: 3.0.h,

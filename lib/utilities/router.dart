@@ -1,4 +1,5 @@
 import 'package:checklst/views/index.dart';
+import 'package:checklst/views/location_selection_view.dart';
 import 'package:checklst/views/undefined_view.dart';
 import 'package:flutter/material.dart';
 import 'routing_constants.dart';
@@ -10,8 +11,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case kIndexView:
       return MaterialPageRoute(builder: (_) => IndexView());
-    // case '/feed':
-    //   return MaterialPageRoute(builder: (_) => Feed());
+    case kLocationSelectionView:
+      return MaterialPageRoute(builder: (_) => LocationSelectionView());
     default:
       return MaterialPageRoute(
         builder: (_) => UndefinedView(pageName: settings.name),

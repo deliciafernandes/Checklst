@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 
+Color kTrueWhite = Color(0xfffafafa);
+
 TextStyle kActiveTextStyle = TextStyle(
   fontSize: 22.0,
   fontFamily: 'WorkSans',

@@ -9,6 +9,7 @@ class LocationService extends ChangeNotifier {
   double longitude;
 
   Future<String> getLocation() async {
+    //IMP PERMISSION LINE
     GeolocationStatus geolocationStatus =
         await Geolocator().checkGeolocationPermissionStatus();
 
@@ -41,6 +42,10 @@ class LocationService extends ChangeNotifier {
   }
 
   Future<double> getLat() async {
+    //IMP PERMISSION LINE
+    GeolocationStatus geolocationStatus =
+        await Geolocator().checkGeolocationPermissionStatus();
+
     try {
       Position position = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
@@ -53,6 +58,10 @@ class LocationService extends ChangeNotifier {
   }
 
   Future<double> getLong() async {
+    //IMP PERMISSION LINE
+    GeolocationStatus geolocationStatus =
+        await Geolocator().checkGeolocationPermissionStatus();
+
     try {
       Position position = await Geolocator()
           .getCurrentPosition(desiredAccuracy: LocationAccuracy.low);
