@@ -19,6 +19,7 @@ class _LocationSelectionViewState extends State<LocationSelectionView> {
         designSize: Size(432.0, 816.0), allowFontScaling: true);
 
     return Scaffold(
+      resizeToAvoidBottomPadding: false,
       appBar: AppBar(
         backgroundColor: kTrueWhite,
         title: Text(
